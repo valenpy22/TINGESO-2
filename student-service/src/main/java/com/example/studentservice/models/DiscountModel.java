@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentModel {
+public class DiscountModel {
     private String rut;
     private double discount_school_type;
     private double discount_senior_year;

@@ -1,13 +1,12 @@
 package com.example.studentservice.controllers;
 
 import com.example.studentservice.entities.StudentEntity;
+import com.example.studentservice.models.DiscountModel;
+import com.example.studentservice.models.FeeModel;
 import com.example.studentservice.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +27,41 @@ public class StudentController {
 
     @GetMapping("/{rut}")
     public ResponseEntity<StudentEntity> findByRut(@PathVariable("rut") String rut){
-        StudentEntity student = studentService.
+        StudentEntity student = studentService.findByRut(rut);
+        if(student == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(student);
+    }
+
+    @PostMapping
+    public void saveStudent(@RequestBody StudentEntity student){
+        studentService.saveStudent(student);
+    }
+
+    @GetMapping("/delete-students")
+    public void deleteStudents(){
+        studentService.deleteStudents();
+    }
+
+    @GetMapping("/fees/{rut}")
+    public ResponseEntity<List<FeeModel>> getFees(@PathVariable("rut") String rut){
+        StudentEntity student = studentService.findByRut(rut);
+        if(student == null){
+            return ResponseEntity.notFound().build();
+        }
+        List<FeeModel> fees = studentService.getFees(rut);
+        return ResponseEntity.ok(fees);
+    }
+
+    @GetMapping("/discounts/{rut}")
+    public ResponseEntity<List<DiscountModel>> getDiscounts(@PathVariable("rut") String rut){
+        StudentEntity student = studentService.findByRut(rut);
+        if(student == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        List<DiscountModel> discounts = studentService.getDiscounts(rut);
+        return ResponseEntity.ok(discounts);
     }
 }

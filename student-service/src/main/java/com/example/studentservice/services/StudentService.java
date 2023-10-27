@@ -2,7 +2,7 @@ package com.example.studentservice.services;
 
 import com.example.studentservice.entities.StudentEntity;
 import com.example.studentservice.models.FeeModel;
-import com.example.studentservice.models.PaymentModel;
+import com.example.studentservice.models.DiscountModel;
 import com.example.studentservice.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +47,8 @@ public class StudentService {
         return restTemplate.getForObject("http://fee-service/fees/bystudents/"+rut, List.class);
     }
 
-    public List<PaymentModel> getPayments(String rut){
-        return restTemplate.getForObject("http://reportsummary-service/payments/"+rut, List.class);
+    public List<DiscountModel> getDiscounts(String rut){
+        return restTemplate.getForObject("http://reportsummary-service/discounts/bystudents/"+rut, List.class);
     }
 
 }
