@@ -35,4 +35,4 @@ spring:
         - id: reportsummary-service
           uri: lb://reportsummary-service
           predicates:
-            - Path=/reportsummary/**
+            - Path=/reportsummaries/**

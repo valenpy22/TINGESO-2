@@ -34,7 +34,7 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
-    @PostMapping
+    @PostMapping("/new-student")
     public void saveStudent(@RequestBody StudentEntity student){
         studentService.saveStudent(student);
     }
