@@ -16,34 +16,29 @@ public class FeeController {
     @Autowired
     FeeService feeService;
 
-    @GetMapping("/list")
-    public String listFeesByRut(@RequestParam(name = "rut", required = false) String rut, Model model){
-        List<FeeEntity> fees;
-        if(rut != null && !rut.isEmpty()){
-            fees = feeService.getFeesByRut(rut);
-        }else{
-            fees = feeService.getAllFees();
+    @GetMapping("/by-student/{rut}")
+    public ResponseEntity<List<FeeEntity>> getFeesByRut(@PathVariable("rut") String rut){
+        List<FeeEntity> fees = feeService.getFeesByRut(rut);
+
+        if(fees == null){
+            return ResponseEntity.notFound().build();
         }
+
+        return ResponseEntity.ok(fees);
+
+    }
+
+    @GetMapping()
+    public String getFees(Model model){
+        List<FeeEntity> fees = feeService.getAllFees();
         model.addAttribute("fees", fees);
         return "list-fees";
     }
 
-    @GetMapping("/search")
-    public String searchFeesByRut(@RequestParam(name = "rut", required = false) String rut, Model model) {
-        List<FeeEntity> fees;
-        if (rut != null && !rut.isEmpty()) {
-            fees = feeService.getFeesByRut(rut);
-        } else {
-            fees = feeService.getAllFees();
-        }
-        model.addAttribute("fees", fees);
-        return "list-fees";
-    }
+    @PutMapping("/pay/{id}")
+    public String payFee(@PathVariable("id") Integer id, Model model) {
 
-    @PostMapping("/pay")
-    public String payFee(@RequestParam("feeId") Integer feeId, Model model) {
-
-        feeService.payFee(feeId);
+        feeService.payFee(id);
 
         List<FeeEntity> fees = feeService.getAllFees();
         model.addAttribute("fees", fees);
@@ -57,17 +52,6 @@ public class FeeController {
         return "delete-all";
     }
 
-    @GetMapping("/by-student/{rut}")
-    public ResponseEntity<List<FeeEntity>> getFeesByRut(@PathVariable("rut") String rut){
-        List<FeeEntity> fees = feeService.getFeesByRut(rut);
-
-        if(fees == null){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(fees);
-
-    }
     @GetMapping("/months-late/{rut}")
     public ResponseEntity<Integer> countMonthsLateByRut(@PathVariable("rut") String rut){
         return ResponseEntity.ok(feeService.countMonthsLate(rut));

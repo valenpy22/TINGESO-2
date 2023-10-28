@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @RestController
-@RequestMapping("")
+@RequestMapping()
 public class ExamController {
     @Autowired
     private ExamService examService;
