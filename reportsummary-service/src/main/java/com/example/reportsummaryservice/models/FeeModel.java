@@ -1,4 +1,4 @@
-package com.example.studentservice.models;
+package com.example.reportsummaryservice.models;
 
 import lombok.Data;
 

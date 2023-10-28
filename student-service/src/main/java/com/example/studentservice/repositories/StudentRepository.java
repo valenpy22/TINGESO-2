@@ -15,5 +15,8 @@ public interface StudentRepository extends JpaRepository<StudentEntity, String> 
     String findSchoolType(@Param("rut") String rut);
 
     @Query(value = "SELECT student.senior_year WHERE students.rut = :rut", nativeQuery = true)
-    int findSeniorYear(@Param("rut") String rut);
+    Integer findSeniorYear(@Param("rut") String rut);
+
+    @Query(value = "SELECT students.payment_method WHERE students.rut = :rut", nativeQuery = true)
+    String findPaymentMethod(@Param("rut") String rut);
 }

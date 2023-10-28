@@ -1,7 +1,6 @@
 package com.example.studentservice.controllers;
 
 import com.example.studentservice.entities.StudentEntity;
-import com.example.studentservice.models.DiscountModel;
 import com.example.studentservice.models.FeeModel;
 import com.example.studentservice.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +34,14 @@ public class StudentController {
     }
 
     @PostMapping("/new-student")
-    public void saveStudent(@RequestBody StudentEntity student){
-        studentService.saveStudent(student);
+    public void saveStudent(@RequestParam("rut") String rut,
+                            @RequestParam("names") String names,
+                            @RequestParam("surnames") String surnames,
+                            @RequestParam("birthday") String birthday,
+                            @RequestParam("school_type") String school_type,
+                            @RequestParam("school_name") String school_name,
+                            @RequestParam("senior_year") Integer senior_year){
+        studentService.saveStudent(rut, names, surnames, birthday, school_type, school_name, senior_year);
     }
 
     @GetMapping("/delete-students")
@@ -54,14 +59,4 @@ public class StudentController {
         return ResponseEntity.ok(fees);
     }
 
-    @GetMapping("/discounts/{rut}")
-    public ResponseEntity<List<DiscountModel>> getDiscounts(@PathVariable("rut") String rut){
-        StudentEntity student = studentService.findByRut(rut);
-        if(student == null){
-            return ResponseEntity.notFound().build();
-        }
-
-        List<DiscountModel> discounts = studentService.getDiscounts(rut);
-        return ResponseEntity.ok(discounts);
-    }
 }

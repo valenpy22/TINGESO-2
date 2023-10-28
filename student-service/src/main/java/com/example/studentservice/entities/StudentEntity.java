@@ -22,5 +22,8 @@ public class StudentEntity {
     private String birthday;
     private String school_type;
     private String school_name;
-    private int senior_year;
+    private Integer senior_year;
+    private String payment_method;
+    private Integer number_of_fees;
+    private double final_price;
 }
