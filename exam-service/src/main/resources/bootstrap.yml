@@ -6,8 +6,7 @@ spring:
     name: exam-service
   cloud:
     config:
-      enabled: true
-      uri: http://localhost:8083
+      uri: http://localhost:8082
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/exams?autorReconnect=true&allowPublicKeyRetrieval=true&useSSL=false

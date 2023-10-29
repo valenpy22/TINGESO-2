@@ -32,7 +32,7 @@ spring:
           uri: lb://fee-service
           predicates:
             - Path=/fees/**
-        - id: reportsummary-service
-          uri: lb://reportsummary-service
+        - id: exam-service
+          uri: lb://exam-service
           predicates:
-            - Path=/reportsummaries/**
+            - Path=/exams/**
