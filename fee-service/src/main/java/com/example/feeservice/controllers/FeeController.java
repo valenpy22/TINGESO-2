@@ -29,10 +29,14 @@ public class FeeController {
     }
 
     @GetMapping()
-    public String getFees(Model model){
+    public ResponseEntity<List<FeeEntity>> getFees(Model model){
         List<FeeEntity> fees = feeService.getAllFees();
-        model.addAttribute("fees", fees);
-        return "list-fees";
+        if(fees == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(fees);
+
     }
 
     @PutMapping("/pay/{id}")

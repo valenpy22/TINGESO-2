@@ -14,7 +14,7 @@ class FileInformationComponent extends Component {
     }
 
     componentDidMount(){
-        fetch("http://localhost:8080/exams")
+        fetch("http://localhost:8080/exams/file-information")
             .then((response) => response.json())
             .then((data) => this.setState({ exams: data }));
     }

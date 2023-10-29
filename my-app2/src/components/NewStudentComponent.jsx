@@ -12,9 +12,12 @@ export default function NewStudentComponent(props){
         names: "",
         surnames: "",
         birthday: "",
-        school_type: "",
+        school_type: "Municipal",
         school_name: "",
         senior_year: "",
+        payment_method: "",
+        number_of_fees: "",
+        final_price: "",
     }
 
     const [input, setInput] = useState(initialState);
@@ -77,9 +80,12 @@ export default function NewStudentComponent(props){
                     school_type: input.school_type,
                     school_name: input.school_name,
                     senior_year: input.senior_year,
+                    payment_method: "",
+                    number_of_fees: "",
+                    final_price: "",
                 };
                 console.log("student => " + JSON.stringify(student));
-                StudentService.createStudent(student).then((res) => {
+                StudentService.saveStudent(student).then((res) => {
                     props.history.push("/students");
                 });
             }else{

@@ -12,17 +12,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/exams")
 public class ExamController {
     @Autowired
     private ExamService examService;
 
-    @GetMapping("/exams/file-upload")
+    @GetMapping("/file-upload")
     public String main(){
         return "file-upload";
     }
 
-    @PostMapping("/exams/file-upload")
+    @PostMapping("/file-upload")
     public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
         examService.save(file);
 
@@ -31,7 +31,7 @@ public class ExamController {
         return "redirect:/file-upload";
     }
 
-    @GetMapping("/exams/file-information")
+    @GetMapping("/file-information")
     public String getExamList(Model model){
         List<ExamEntity> exams = examService.getExams();
         model.addAttribute("exams", exams);
@@ -43,7 +43,7 @@ public class ExamController {
         return ResponseEntity.ok(examService.getReportSummaries());
     }
 
-    @DeleteMapping("/exams/delete-all")
+    @DeleteMapping("/delete-all")
     public void deleteExams(){
         examService.deleteAll();
     }

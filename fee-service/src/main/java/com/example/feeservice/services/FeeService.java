@@ -99,6 +99,7 @@ public class FeeService {
             }else{
                 fee.setMax_date_payment("10/" + currentMonth + "/" + currentYear);
             }
+            calculateEachFeePriceByPrincipalDiscounts(rut);
             saveFee(fee);
             fee_count++;
         }

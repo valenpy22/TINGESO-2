@@ -41,6 +41,7 @@ public class StudentService {
     }
 
     public void saveStudent(StudentEntity student){
+        student.setFinal_price(calculateFinalPriceByDiscounts(student.getRut()));
         studentRepository.save(student);
     }
 
@@ -133,8 +134,6 @@ public class StudentService {
 
         if(payment_method.equals("Contado")){
             student.setFinal_price(1500000*0.5);
-        }else{
-            student.setFinal_price(1500000.0);
         }
         saveStudent(student);
     }

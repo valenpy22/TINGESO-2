@@ -44,7 +44,7 @@ export default function GenerateFeeComponent(props){
                     number_of_fees: input.number_of_fees,
                 };
                 console.log("fees_generated => " + JSON.stringify(fees_generated));
-                FeeService.generateFees(fees_generated).then((res) => {
+                FeeService.generateFees(input.rut, input.number_of_fees).then((res) => {
                     props.history.push("/generate-fees");
                 });
             }else{

@@ -34,14 +34,8 @@ public class StudentController {
     }
 
     @PostMapping("/new-student")
-    public void saveStudent(@RequestParam("rut") String rut,
-                            @RequestParam("names") String names,
-                            @RequestParam("surnames") String surnames,
-                            @RequestParam("birthday") String birthday,
-                            @RequestParam("school_type") String school_type,
-                            @RequestParam("school_name") String school_name,
-                            @RequestParam("senior_year") Integer senior_year){
-        studentService.saveStudent(rut, names, surnames, birthday, school_type, school_name, senior_year);
+    public void saveStudent(@RequestBody StudentEntity student){
+        studentService.saveStudent(student);
     }
 
     @DeleteMapping("/delete-all")
