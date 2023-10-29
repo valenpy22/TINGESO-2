@@ -11,7 +11,7 @@ function NavBarComponent2(){
                 </div>
                 <nav>
                     <a class="btn" href="/"><button>Volver al menú</button></a>
-                    <a class="btn-2" href="/list-students"><button>Ver estudiantes</button></a>
+                    <a class="btn-2" href="/students"><button>Ver estudiantes</button></a>
                 </nav>
             </header>
         </NavStyle>

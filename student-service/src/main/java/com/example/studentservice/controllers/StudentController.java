@@ -44,7 +44,7 @@ public class StudentController {
         studentService.saveStudent(rut, names, surnames, birthday, school_type, school_name, senior_year);
     }
 
-    @GetMapping("/delete-students")
+    @DeleteMapping("/delete-all")
     public void deleteStudents(){
         studentService.deleteStudents();
     }

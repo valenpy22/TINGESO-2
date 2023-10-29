@@ -61,14 +61,14 @@ public class StudentService {
         studentRepository.deleteAll();
     }
 
-    public double calculateDiscountBySeniorYear(String rut){
+    public Double calculateDiscountBySeniorYear(String rut){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String senior_year = getSeniorYear(rut).toString();
         LocalDate dBefore = LocalDate.parse("31/12/" + senior_year, formatter);
         LocalDate dAfter = LocalDate.now();
 
         long diff = dBefore.until(dAfter, ChronoUnit.YEARS);
-        double total_discount = 0;
+        double total_discount = 0.0;
 
         if(diff < 1){
             total_discount = 1500000 * 0.15;
@@ -81,8 +81,8 @@ public class StudentService {
         return total_discount;
     }
 
-    public double calculateDiscountBySchoolType(String rut){
-        double total_discount = 0;
+    public Double calculateDiscountBySchoolType(String rut){
+        double total_discount = 0.0;
         String school_type = getSchoolType(rut);
 
         if(school_type.equals("Municipal")){
@@ -93,8 +93,8 @@ public class StudentService {
         return total_discount;
     }
 
-    public double calculateFinalPriceByDiscounts(String rut){
-        double total = 1500000;
+    public Double calculateFinalPriceByDiscounts(String rut){
+        double total = 1500000.0;
         if(getPaymentMethod(rut).equals("Cuotas")){
             double discount_school_type = calculateDiscountBySchoolType(rut);
             double discount_senior_year = calculateDiscountBySeniorYear(rut);
@@ -134,7 +134,7 @@ public class StudentService {
         if(payment_method.equals("Contado")){
             student.setFinal_price(1500000*0.5);
         }else{
-            student.setFinal_price(1500000);
+            student.setFinal_price(1500000.0);
         }
         saveStudent(student);
     }
@@ -149,7 +149,7 @@ public class StudentService {
 
         setFinalPriceByPaymentMethod(rut);
         setMaxNumberOfFees(rut, number_of_fees);
-        double final_price = calculateFinalPriceByDiscounts(rut);
+        Double final_price = calculateFinalPriceByDiscounts(rut);
         student.setFinal_price(final_price);
         saveStudent(student);
     }

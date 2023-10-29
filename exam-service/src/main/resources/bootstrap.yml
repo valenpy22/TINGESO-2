@@ -3,14 +3,14 @@ spring:
     restart:
       additional-paths: src/main/java
   application:
-    name: reportsummary-service
+    name: exam-service
   cloud:
     config:
       enabled: true
-      uri: http://localhost:8081
+      uri: http://localhost:8083
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/reports?autorReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/exams?autorReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: Tingeso2023#
   jpa:

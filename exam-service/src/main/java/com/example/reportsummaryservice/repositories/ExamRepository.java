@@ -23,10 +23,10 @@ public interface ExamRepository extends JpaRepository<ExamEntity, Integer> {
     Integer getNumberOfExamsByRutByMonth(@Param("rut") String rut, @Param("exam_date") String exam_date);
 
     @Query(value = "SELECT AVG(exams.score) AS average_score FROM exams WHERE exams.rut =:rut GROUP BY rut", nativeQuery = true)
-    double getAverageScoreByRut(@Param("rut") String rut);
+    Double getAverageScoreByRut(@Param("rut") String rut);
 
     @Query(value = "SELECT AVG(exams.score) AS average_score FROM exams WHERE exams.rut = :rut AND exams.exam_date = :exam_date GROUP BY exams.rut, YEAR(exam_date), MONTH(exam_date)", nativeQuery = true)
-    double getAverageScoreByRutAndMonth(@Param("rut") String rut, @Param("exam_date") String exam_date);
+    Double getAverageScoreByRutAndMonth(@Param("rut") String rut, @Param("exam_date") String exam_date);
 
     @Query(value = "SELECT exams.exam_date FROM exams WHERE exams.rut = :rut ORDER BY exams.exam_date DESC LIMIT 1", nativeQuery = true)
     String findByExam_dateOrderByExam_dateDesc(@Param("rut") String rut);

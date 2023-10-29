@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import NavBarComponent3 from "./NavBarComponent3";
 import styled from "styled-components";
 
-class FeeListComponent extends Component {
+class DiscountComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fees: [],
+            discounts: [],
         };
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/fees")
+        fetch("http://localhost:8080/discounts")
             .then((response) => response.json())
-            .then((data) => this.setState({ fees: data }));
+            .then((data) => this.setState({ discounts: data }));
     }
 
     render() {
@@ -23,27 +23,27 @@ class FeeListComponent extends Component {
                 <Styles>
                     <div class="f">
                         <div class="container">
-                            <h1><b>Lista de cuotas</b></h1>
+                            <h1><b>Lista de descuentos</b></h1>
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Rut</th>
-                                        <th>N° de cuota</th>
-                                        <th>Precio</th>
-                                        <th>Fecha de pago</th>
-                                        <th>Máxima fecha de pago</th>
-                                        <th>Estado</th>
+                                        <th>Descuento tipo de colegio</th>
+                                        <th>Descuento año de egreso</th>
+                                        <th>Descuento puntaje promedio</th>
+                                        <th>Intereses meses de atraso</th>
+                                        <th>Valor total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.fees.map((fee) => (
-                                        <tr key={fee.id}>
-                                            <td>{fee.rut}</td>
-                                            <td>{fee.number_of_fee}</td>
-                                            <td>{fee.price}</td>
-                                            <td>{fee.payment_date}</td>
-                                            <td>{fee.max_payment_date}</td>
-                                            <td>{fee.state}</td>
+                                    {this.state.discounts.map((discount) => (
+                                        <tr key={discount.rut}>
+                                            <td>{discount.rut}</td>
+                                            <td>{discount.discount_type_school}</td>
+                                            <td>{discount.discount_senior_year}</td>
+                                            <td>{discount.discount_average_score}</td>
+                                            <td>{discount.interest_months_late}</td>
+                                            <td>{discount.total_price}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -56,7 +56,7 @@ class FeeListComponent extends Component {
     }
 }
 
-export default FeeListComponent;
+export default DiscountComponent;
 
 const Styles = styled.div`
 .text-center {

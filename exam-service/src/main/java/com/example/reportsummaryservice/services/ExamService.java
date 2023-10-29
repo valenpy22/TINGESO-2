@@ -109,11 +109,11 @@ public class ExamService {
         return examRepository.getRuts();
     }
 
-    public double getAverageScoreByRutAndMonth(String rut, String exam_date){
+    public Double getAverageScoreByRutAndMonth(String rut, String exam_date){
         return examRepository.getAverageScoreByRutAndMonth(rut, exam_date);
     }
 
-    public double getAverageScoreByRut(String rut){
+    public Double getAverageScoreByRut(String rut){
         return examRepository.getAverageScoreByRut(rut);
     }
 
@@ -150,12 +150,12 @@ public class ExamService {
 
     public List<Object> calculateReportSummary(String rut){
         StudentModel studentModel = restTemplate.getForObject("http://student-service/students/"+rut, StudentModel.class);
-        double final_price = restTemplate.getForObject("http://fee-service/fees/total-price-by-fees/"+rut, Double.class);
+        Double final_price = restTemplate.getForObject("http://fee-service/fees/total-price-by-fees/"+rut, Double.class);
         Integer total_fees = restTemplate.getForObject("http://fee-service/fees/count-fees/"+rut, Integer.class);
         Integer paid_fees = restTemplate.getForObject("http://fee-service/fees/count-paid-fees/"+rut, Integer.class);
-        double total_paid = restTemplate.getForObject("http://fee-service/fees/total-paid/"+rut, Double.class);
+        Double total_paid = restTemplate.getForObject("http://fee-service/fees/total-paid/"+rut, Double.class);
         String last_payment = restTemplate.getForObject("http://fee-service/fees/last-payment/"+rut, String.class);
-        double total_debt = restTemplate.getForObject("http://fee-service/fees/total-debt/"+rut, Double.class);
+        Double total_debt = restTemplate.getForObject("http://fee-service/fees/total-debt/"+rut, Double.class);
         Integer late_fees = restTemplate.getForObject("http://fee-service/fees/count-late-fees/"+rut, Integer.class);
 
         ArrayList<Object> report = new ArrayList<>();

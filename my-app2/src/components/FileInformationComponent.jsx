@@ -1,49 +1,46 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
 import NavBarComponent3 from "./NavBarComponent3";
 import styled from "styled-components";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import swal from 'sweetalert';
 
-class FeeListComponent extends Component {
-    constructor(props) {
+class FileInformationComponent extends Component {
+    constructor(props){
         super(props);
         this.state = {
-            fees: [],
+            exams: [],
         };
     }
 
-    componentDidMount() {
-        fetch("http://localhost:8080/fees")
+    componentDidMount(){
+        fetch("http://localhost:8080/exams")
             .then((response) => response.json())
-            .then((data) => this.setState({ fees: data }));
+            .then((data) => this.setState({ exams: data }));
     }
 
-    render() {
+    render(){
         return (
             <div>
                 <NavBarComponent3 />
                 <Styles>
-                    <div class="f">
-                        <div class="container">
-                            <h1><b>Lista de cuotas</b></h1>
-                            <table class="table table-striped table-bordered">
+                    <div class = "f">
+                        <div class = "container">
+                            <h1><b>Información de archivos</b></h1>
+                            <table class = "table table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Rut</th>
-                                        <th>N° de cuota</th>
-                                        <th>Precio</th>
-                                        <th>Fecha de pago</th>
-                                        <th>Máxima fecha de pago</th>
-                                        <th>Estado</th>
+                                        <th>Fecha</th>
+                                        <th>Puntaje</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.fees.map((fee) => (
-                                        <tr key={fee.id}>
-                                            <td>{fee.rut}</td>
-                                            <td>{fee.number_of_fee}</td>
-                                            <td>{fee.price}</td>
-                                            <td>{fee.payment_date}</td>
-                                            <td>{fee.max_payment_date}</td>
-                                            <td>{fee.state}</td>
+                                    {this.state.exams.map((exam) => (
+                                        <tr key={exam.id}>
+                                            <td>{exam.rut}</td>
+                                            <td>{exam.exam_date}</td>
+                                            <td>{exam.score}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -56,7 +53,8 @@ class FeeListComponent extends Component {
     }
 }
 
-export default FeeListComponent;
+
+export default FileInformationComponent;
 
 const Styles = styled.div`
 .text-center {

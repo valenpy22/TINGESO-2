@@ -64,7 +64,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div class="single-box">
-                        <a href="/a">
+                        <a href="/discounts">
                         <div class="img-area">
                         </div>
                         </a>

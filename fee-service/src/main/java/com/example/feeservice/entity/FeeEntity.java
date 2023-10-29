@@ -20,6 +20,6 @@ public class FeeEntity {
     private String max_date_payment;
     private String state;
     private String payment_date;
-    private double price;
+    private Double price;
     private Integer number_of_fee;
 }

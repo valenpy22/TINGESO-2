@@ -43,4 +43,9 @@ public class ExamController {
         return ResponseEntity.ok(examService.getReportSummaries());
     }
 
+    @DeleteMapping("/exams/delete-all")
+    public void deleteExams(){
+        examService.deleteAll();
+    }
+
 }

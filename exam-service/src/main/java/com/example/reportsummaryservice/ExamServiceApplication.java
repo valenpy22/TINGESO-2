@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ReportsummaryServiceApplication {
+public class ExamServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReportsummaryServiceApplication.class, args);
+		SpringApplication.run(ExamServiceApplication.class, args);
 	}
 
 }

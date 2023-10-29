@@ -25,5 +25,5 @@ public class StudentEntity {
     private Integer senior_year;
     private String payment_method;
     private Integer number_of_fees;
-    private double final_price;
+    private Double final_price;
 }

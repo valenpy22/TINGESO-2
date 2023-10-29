@@ -104,21 +104,21 @@ public class FeeService {
         }
     }
 
-    public int getMonth(){
+    public Integer getMonth(){
         Date date = new Date();
         ZoneId timeZone = ZoneId.systemDefault();
 
         return date.toInstant().atZone(timeZone).getMonthValue();
     }
 
-    public int getYear(){
+    public Integer getYear(){
         Date date = new Date();
         ZoneId timeZone = ZoneId.systemDefault();
 
         return date.toInstant().atZone(timeZone).getYear();
     }
 
-    public boolean areAnyFeesPaid(String rut){
+    public Boolean areAnyFeesPaid(String rut){
         List<FeeEntity> feeEntities = feeRepository.getFeesByRut(rut);
 
         for(FeeEntity fee : feeEntities){
@@ -129,7 +129,7 @@ public class FeeService {
         return false;
     }
 
-    public double calculateTotalDebt(String rut){
+    public Double calculateTotalDebt(String rut){
         List<FeeEntity> fees = feeRepository.getFeesByRut(rut);
         double total_debt = 0;
 
@@ -142,7 +142,7 @@ public class FeeService {
         return total_debt;
     }
 
-    public double calculateTotalPaid(String rut){
+    public Double calculateTotalPaid(String rut){
         List<FeeEntity> paid_fees = feeRepository.getPaidFeesByRut(rut);
 
         double total_paid = 0;
@@ -158,7 +158,7 @@ public class FeeService {
         return fee.getPayment_date();
     }
 
-    public double calculateTotalPriceByFees(String rut){
+    public Double calculateTotalPriceByFees(String rut){
         List<FeeEntity> fees = feeRepository.getFeesByRut(rut);
 
         double total_price = 0;
@@ -170,7 +170,7 @@ public class FeeService {
         return total_price;
     }
 
-    public boolean isFeeLate(FeeEntity fee){
+    public Boolean isFeeLate(FeeEntity fee){
         if(fee.getPayment_date() == null){
             String max_date_payment = fee.getMax_date_payment();
 
@@ -230,10 +230,10 @@ public class FeeService {
         feeRepository.save(fee);
     }
 
-    public double calculateInterestByMonthsLate(String rut){
+    public Double calculateInterestByMonthsLate(String rut){
         Integer months_late = countMonthsLate(rut);
         List<FeeEntity> fees = feeRepository.getFeesByRut(rut);
-        double total_interest = 0;
+        double total_interest = 0.0;
 
         for(FeeEntity fee : fees){
             if(isFeeLate(fee)){
@@ -256,11 +256,11 @@ public class FeeService {
         return total_interest;
     }
 
-    public double calculateEachFeePriceByPrincipalDiscounts(String rut){
+    public Double calculateEachFeePriceByPrincipalDiscounts(String rut){
         StudentModel student = restTemplate.getForObject("http://student-service/students/"+rut, StudentModel.class);
         if(student.getPayment_method().equals("Cuotas")){
             List<FeeEntity> fees = getFeesByRut(rut);
-            double fee_price = student.getFinal_price()/student.getNumber_of_fees();
+            Double fee_price = student.getFinal_price()/student.getNumber_of_fees();
 
             for(FeeEntity fee : fees){
                 fee.setPrice(fee_price);
@@ -268,13 +268,13 @@ public class FeeService {
             }
             return fee_price;
         }else{
-            return 0;
+            return 0.0;
         }
     }
 
-    public double calculateDiscountOnFeesByAverageScore(String rut, double average_score){
+    public Double calculateDiscountOnFeesByAverageScore(String rut, Double average_score){
         List<FeeEntity> fees = getFeesByRut(rut);
-        double discount_average_score = 0;
+        double discount_average_score = 0.0;
 
         for(FeeEntity fee : fees){
             if(fee.getState().equals("PENDING")){
