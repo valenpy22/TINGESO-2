@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import NavBarComponent2 from "./NavBarComponent2";
 import styled from "styled-components";
 import FeeService from "../services/FeeService";
+import StudentService from "../services/StudentService";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
@@ -44,9 +45,22 @@ export default function GenerateFeeComponent(props){
                     number_of_fees: input.number_of_fees,
                 };
                 console.log("fees_generated => " + JSON.stringify(fees_generated));
-                FeeService.generateFees(input.rut, input.number_of_fees).then((res) => {
+                StudentService.setMaxNumberOfFees(input.rut, input.number_of_fees).then((res) => {
                     props.history.push("/generate-fees");
                 });
+
+                StudentService.getStudentByRut(input.rut).then((res) => {
+                    let student = res.data;
+                    console.log("student => " + JSON.stringify(student));
+                    let max_number_of_fees = student.number_of_fees;
+                    console.log("max_number_of_fees => " + JSON.stringify(max_number_of_fees));
+                    FeeService.generateFees(input.rut, max_number_of_fees).then((res) => {
+                        props.history.push("/generate-fees");
+                    }
+                    );
+                });
+
+            
             }else{
                 swal("Cuotas no generadas", {
                     icon: "error",

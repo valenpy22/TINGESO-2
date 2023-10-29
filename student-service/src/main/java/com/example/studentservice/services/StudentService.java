@@ -41,21 +41,7 @@ public class StudentService {
     }
 
     public void saveStudent(StudentEntity student){
-        student.setFinal_price(calculateFinalPriceByDiscounts(student.getRut()));
         studentRepository.save(student);
-    }
-
-    public void saveStudent(String rut, String names, String surnames, String birthday,
-                            String school_type, String school_name, Integer senior_year){
-        StudentEntity student = new StudentEntity();
-        student.setRut(rut);
-        student.setNames(names);
-        student.setSurnames(surnames);
-        student.setBirthday(birthday);
-        student.setSchool_type(school_type);
-        student.setSchool_name(school_name);
-        student.setSenior_year(senior_year);
-        saveStudent(student);
     }
 
     public void deleteStudents(){

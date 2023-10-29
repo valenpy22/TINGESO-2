@@ -2,10 +2,8 @@ package com.example.feeservice.controllers;
 
 import com.example.feeservice.entity.FeeEntity;
 import com.example.feeservice.services.FeeService;
-import jakarta.ws.rs.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +18,7 @@ public class FeeController {
     public ResponseEntity<List<FeeEntity>> getFeesByRut(@PathVariable("rut") String rut){
         List<FeeEntity> fees = feeService.getFeesByRut(rut);
 
-        if(fees == null){
+        if(fees.isEmpty()){
             return ResponseEntity.notFound().build();
         }
 
@@ -29,9 +27,9 @@ public class FeeController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<FeeEntity>> getFees(Model model){
+    public ResponseEntity<List<FeeEntity>> getFees(){
         List<FeeEntity> fees = feeService.getAllFees();
-        if(fees == null){
+        if(fees.isEmpty()){
             return ResponseEntity.notFound().build();
         }
 
@@ -40,14 +38,16 @@ public class FeeController {
     }
 
     @PutMapping("/pay/{id}")
-    public String payFee(@PathVariable("id") Integer id, Model model) {
+    public ResponseEntity<List<FeeEntity>> payFee(@PathVariable("id") Integer id) {
 
         feeService.payFee(id);
 
         List<FeeEntity> fees = feeService.getAllFees();
-        model.addAttribute("fees", fees);
+        if(fees.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
 
-        return "list-fees";
+        return ResponseEntity.ok(fees);
     }
 
     @DeleteMapping("/delete-all")
@@ -104,10 +104,9 @@ public class FeeController {
         return ResponseEntity.ok(feeService.countLateFees(rut));
     }
 
-    @PostMapping("/generate-fees/{rut}/{number_of_fees}")
-    public ResponseEntity<String> generateFees(@PathVariable("rut") String rut, @PathVariable("number_of_fees") int number_of_fees){
+    @PutMapping("/generate-fees/{rut}/{number_of_fees}")
+    public void generateFees(@PathVariable("rut") String rut, @PathVariable("number_of_fees") int number_of_fees){
         feeService.generateFees(rut, number_of_fees);
-        return ResponseEntity.ok("/");
     }
 
     @PutMapping("/interest-months-late/{rut}")

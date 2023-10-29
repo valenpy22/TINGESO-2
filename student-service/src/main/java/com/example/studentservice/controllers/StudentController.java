@@ -50,7 +50,35 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
         List<FeeModel> fees = studentService.getFees(rut);
+        if(fees.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(fees);
+    }
+
+    @PutMapping("/set-max-number-of-fees/{rut}/{number_of_fees}")
+    public void setMaxNumberOfFees(@PathVariable("rut") String rut, @PathVariable("number_of_fees") Integer number_of_fees){
+        studentService.setPaymentMethod(rut, number_of_fees);
+    }
+
+    @GetMapping("/calculate-discount-senior-year/{rut}")
+    public ResponseEntity<Double> calculateDiscountBySeniorYear(@PathVariable("rut") String rut){
+        StudentEntity student = studentService.findByRut(rut);
+        if(student == null){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(studentService.calculateDiscountBySeniorYear(rut));
+    }
+
+    @GetMapping("/calculate-discount-school-type/{rut}")
+    public ResponseEntity<Double> calculateDiscountBySchoolType(@PathVariable("rut") String rut){
+        StudentEntity student = studentService.findByRut(rut);
+        if(student == null){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(studentService.calculateDiscountBySchoolType(rut));
     }
 
 }

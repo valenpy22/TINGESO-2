@@ -32,15 +32,29 @@ public class ExamController {
     }
 
     @GetMapping("/file-information")
-    public String getExamList(Model model){
+    public ResponseEntity<List<ExamEntity>> getExamList(){
         List<ExamEntity> exams = examService.getExams();
-        model.addAttribute("exams", exams);
-        return "file-information";
+        if(exams.isEmpty()){
+            ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(exams);
     }
 
     @GetMapping("/report-summaries")
     public ResponseEntity<List<List<Object>>> getReportSummaries(){
+        if(examService.getReportSummaries().isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         return ResponseEntity.ok(examService.getReportSummaries());
+    }
+
+    @GetMapping("/discounts")
+    public ResponseEntity<List<List<Object>>> getDiscounts(){
+        if(examService.getDiscounts().isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(examService.getDiscounts());
     }
 
     @DeleteMapping("/delete-all")

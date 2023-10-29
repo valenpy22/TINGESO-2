@@ -176,4 +176,36 @@ public class ExamService {
         return report;
     }
 
+    public List<Object> calculateDiscount(String rut){
+        StudentModel studentModel = restTemplate.getForObject("http://student-service/students/"+rut, StudentModel.class);
+        Double discount_senior_year = restTemplate.getForObject("http://student-service/students/calculate-discount-senior-year/"+rut, Double.class);
+        Double discount_school_type = restTemplate.getForObject("http://student-service/students/calculate-discount-school-type/"+rut, Double.class);
+        String last_exam_date = getLastExamDate(rut);
+        Double average_score = getAverageScoreByRutAndMonth(rut, last_exam_date);
+        Double discount_average_score = restTemplate.getForObject("http://fee-service/fees/score-discount/"+rut+"/"+average_score, Double.class);
+        Double interest_months_late = restTemplate.getForObject("http://fee-service/fees/interest-months-late/"+rut, Double.class);
+
+        ArrayList<Object> discount = new ArrayList<>();
+
+        discount.add(rut);
+        discount.add(discount_school_type);
+        discount.add(discount_senior_year);
+        discount.add(discount_average_score);
+        discount.add(interest_months_late);
+        discount.add(studentModel.getFinal_price());
+
+        return discount;
+    }
+
+    public List<List<Object>> getDiscounts(){
+        List<String> ruts = getRuts();
+        List<List<Object>> discounts = new ArrayList<>();
+
+        for(String rut : ruts){
+            discounts.add(calculateDiscount(rut));
+        }
+
+        return discounts;
+    }
+
 }

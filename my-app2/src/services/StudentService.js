@@ -12,6 +12,10 @@ class StudentService{
     deleteStudents(){
         return axios.delete(`http://localhost:8080/students/delete-all`);
     }
+
+    setMaxNumberOfFees(rut, number_of_fees){
+        
+    }
 }
 
 export default new StudentService();

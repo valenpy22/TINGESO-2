@@ -257,7 +257,7 @@ public class FeeService {
         return total_interest;
     }
 
-    public Double calculateEachFeePriceByPrincipalDiscounts(String rut){
+    public void calculateEachFeePriceByPrincipalDiscounts(String rut){
         StudentModel student = restTemplate.getForObject("http://student-service/students/"+rut, StudentModel.class);
         if(student.getPayment_method().equals("Cuotas")){
             List<FeeEntity> fees = getFeesByRut(rut);
@@ -267,9 +267,6 @@ public class FeeService {
                 fee.setPrice(fee_price);
                 saveFee(fee);
             }
-            return fee_price;
-        }else{
-            return 0.0;
         }
     }
 
