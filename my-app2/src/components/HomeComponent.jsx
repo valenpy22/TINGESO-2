@@ -12,7 +12,6 @@ export default function Home() {
                     <div class="single-box">
                         <a href="/file-upload">
                         <div class="img-area">
-                            <img src="https://img.freepik.com/vector-premium/chat-archivo-documento-texto-comentando-o-editando-documentos-linea-ilustracion-dibujos-animados-plana_101884-838.jpg" alt="Cargar información">
                         </div>
                         </a>
                         <div class="img-text">
@@ -22,7 +21,6 @@ export default function Home() {
                     <div class="single-box">
                         <a href="/students">
                         <div class="img-area">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2784/2784403.png" alt="Ver estudiantes">
                         </div>
                         </a>
                         <div class="img-text">
@@ -32,7 +30,6 @@ export default function Home() {
                     <div class="single-box">
                         <a href="/list-fees">
                         <div class="img-area">
-                            <img src="https://img.freepik.com/vector-gratis/ingresos-netos-calculando-ilustracion-concepto-abstracto-calculo-sueldos-formula-ingresos-netos-salario-neto-contabilidad-corporativa-calculo-ganancias-estimacion-ganancias_335657-1238.jpg?w=2000" alt="Listar cuotas">
                         </div>
                         </a>
                         <div class="img-text">
@@ -42,7 +39,6 @@ export default function Home() {
                     <div class="single-box">
                         <a href="/report-summary">
                         <div class="img-area">
-                            <img src="https://previews.123rf.com/images/magurok/magurok1606/magurok160600092/60046224-lado-la-celebraci%C3%B3n-de-solicitud-de-trabajo-aprobado-aprobado-cv-con-el-sello-la-l%C3%ADnea-delgada-plana.jpg" alt="Obtener resumen de pagos">
                         </div>
                         </a>
                         <div class="img-text">
@@ -52,7 +48,6 @@ export default function Home() {
                     <div class="single-box">
                         <a href="/new-student">
                         <div class="img-area">
-                            <img src="https://media.istockphoto.com/vectors/agreement-contract-and-offer-color-line-icon-proposal-linear-vector-vector-id1271477227?k=20&m=1271477227&s=612x612&w=0&h=XOSF2ISnfGJZ7bb-fU7rRdDJzTKehDmOF9kcJ5gIEmA=" alt="Ingresar nuevo estudiante">
                         </div>
                         </a>
                         <div class="img-text">
@@ -62,7 +57,6 @@ export default function Home() {
                     <div class="single-box">
                         <a href="/generate-fees">
                         <div class="img-area">
-                            <img src="https://cdn-icons-png.flaticon.com/512/5669/5669068.png" alt="Generar cuotas">
                         </div>
                         </a>
                         <div class="img-text">
@@ -70,9 +64,8 @@ export default function Home() {
                         </div>
                     </div>
                     <div class="single-box">
-                        <a href="/payments-sheet">
+                        <a href="/a">
                         <div class="img-area">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2124/2124502.png" alt="Calcular planilla">
                         </div>
                         </a>
                         <div class="img-text">
@@ -82,7 +75,6 @@ export default function Home() {
                     <div class="single-box">
                         <a href="/delete-all">
                         <div class="img-area">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3687/3687412.png" alt="Eliminar todo">
                         </div>
                         </a>
                         <div class="img-text">
@@ -133,5 +125,61 @@ const HomeStyle = styled.nav`
     transition: .3s
 }
 
+.img-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border: 6px solid #ddd;
+    border-radius: 50%;
+    padding: 20px;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+}
 
+.single-box:nth-child(1) .img-area{
+    background-image: url(https://img.freepik.com/vector-premium/chat-archivo-documento-texto-comentando-o-editando-documentos-linea-ilustracion-dibujos-animados-plana_101884-838.jpg)
+}
+
+.header-text{
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 48px;
+}
+.img-text p{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.single-box:hover{
+    background: #e84393;
+    color: #fff;}
+
+.single-box:nth-child(2) .img-area{
+        background-image: url(https://cdn-icons-png.flaticon.com/512/2784/2784403.png)
+}
+.single-box:nth-child(3) .img-area{
+        background-image: url(https://img.freepik.com/vector-gratis/ingresos-netos-calculando-ilustracion-concepto-abstracto-calculo-sueldos-formula-ingresos-netos-salario-neto-contabilidad-corporativa-calculo-ganancias-estimacion-ganancias_335657-1238.jpg?w=2000)
+}
+.single-box:nth-child(4) .img-area{
+        background-image: url(https://previews.123rf.com/images/magurok/magurok1606/magurok160600092/60046224-lado-la-celebraci%C3%B3n-de-solicitud-de-trabajo-aprobado-aprobado-cv-con-el-sello-la-l%C3%ADnea-delgada-plana.jpg)
+}
+.single-box:nth-child(5) .img-area{
+        background-image: url(https://media.istockphoto.com/vectors/agreement-contract-and-offer-color-line-icon-proposal-linear-vector-vector-id1271477227?k=20&m=1271477227&s=612x612&w=0&h=XOSF2ISnfGJZ7bb-fU7rRdDJzTKehDmOF9kcJ5gIEmA=)
+}
+.single-box:nth-child(6) .img-area{
+    background-image: url(https://cdn-icons-png.flaticon.com/512/5669/5669068.png)
+}
+.single-box:nth-child(7) .img-area{
+    background-image: url(https://cdn-icons-png.flaticon.com/512/2124/2124502.png)
+}
+.single-box:nth-child(8) .img-area{
+    background-image: url(https://cdn-icons-png.flaticon.com/512/3687/3687412.png)
+}
+
+.login-box{
+    cursor: pointer;
+}
 `

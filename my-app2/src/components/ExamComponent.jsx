@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import NavBarComponent1 from "./NavBarComponent1";
 
 import ExamService from "../services/ExamService";
 import styled from "styled-components";
@@ -52,29 +53,30 @@ class ExamComponent extends Component{
     render(){
         return (
             <div className="home">
-            <Styles>
-              <div class="f">
-                <div class="container">
-                  <h1><b>Cargar el archivo de datos</b></h1>
-                  <Row className="mt-4">
-                    <Col col="12">
-                      <Form.Group className="mb-3" controlId="formFileLg">
-                        <Form.Control type="file" size="lg" onChange={this.onFileChange} />
-                      </Form.Group>
-                      <Button varian="primary" onClick={this.onFileUpload}>
-                        Cargar el archivo a la Base de Datos</Button>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-              <br>
-              </br>
-              <hr>
-              </hr>
-              <div class="form1">
-                <h5><b>Recuerde que el nombre del archivo debe ser "student_exams.csv"</b></h5>
-              </div>
-            </Styles>
+                <NavBarComponent1/>
+                <Styles>
+                    <div class="f">
+                        <div class="container">
+                        <h1><b>Cargar el archivo de datos</b></h1>
+                        <Row className="mt-4">
+                            <Col col="12">
+                            <Form.Group className="mb-3" controlId="formFileLg">
+                                <Form.Control type="file" size="lg" onChange={this.onFileChange} />
+                            </Form.Group>
+                            <Button variant="primary" onClick={this.onFileUpload}>
+                                Cargar el archivo a la Base de Datos</Button>
+                            </Col>
+                        </Row>
+                        </div>
+                    </div>
+                    <br>
+                    </br>
+                    <hr>
+                    </hr>
+                    <div class="form1">
+                        <h5><b>Recuerde que el nombre del archivo debe ser "student_exams.csv"</b></h5>
+                    </div>
+                </Styles>
           </div>
         )
     }

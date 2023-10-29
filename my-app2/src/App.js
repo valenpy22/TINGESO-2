@@ -1,17 +1,23 @@
 import logo from './logo.svg';
-import './App.module.css';
 
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ExamComponent from './components/ExamComponent';
+import HomeComponent from './components/HomeComponent';
+import GenerateFeeComponent from './components/GenerateFeeComponent';
+import NewStudentComponent from './components/NewStudentComponent';
+import StudentListComponent from './components/StudentListComponent';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path = "/" element={<Home />} />
+          <Route path = "/" element={<HomeComponent />} />
           <Route path = "/file-upload" element={<ExamComponent />} />
+          <Route path = "/new-student" element={<NewStudentComponent />} />
+          <Route path = "/generate-fees" element={<GenerateFeeComponent />} />
+          <Route path = "/students" element={<StudentListComponent />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
