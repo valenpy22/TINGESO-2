@@ -43,7 +43,7 @@ class FeeListComponent extends Component {
                                                 <td>{fee.number_of_fee}</td>
                                                 <td>{fee.price}</td>
                                                 <td>{fee.payment_date}</td>
-                                                <td>{fee.max_payment_date}</td>
+                                                <td>{fee.max_date_payment}</td>
                                                 <td>{fee.state}</td>
                                             </tr>
                                         ))}

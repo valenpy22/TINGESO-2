@@ -57,9 +57,10 @@ public class StudentController {
         return ResponseEntity.ok(fees);
     }
 
-    @PostMapping("/set-max-number-of-fees/{rut}/{number_of_fees}")
-    public void setMaxNumberOfFees(@PathVariable("rut") String rut, @PathVariable("number_of_fees") Integer number_of_fees){
-        studentService.setPaymentMethod(rut, number_of_fees);
+    @PutMapping("/set-max-number-of-fees/{rut}/{number_of_fees}")
+    public void setMaxNumberOfFees(@PathVariable("rut") String rut, @PathVariable("number_of_fees") String number_of_fees){
+        Integer number_fees = Integer.parseInt(number_of_fees);
+        studentService.setPaymentMethod(rut, number_fees);
     }
 
     @GetMapping("/calculate-discount-senior-year/{rut}")

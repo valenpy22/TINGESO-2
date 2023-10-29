@@ -107,6 +107,7 @@ public class StudentService {
                 student.setNumber_of_fees(Math.min(number_of_fees, 4));
             }
         }else{
+            student.setNumber_of_fees(0);
             student.setPayment_method("Contado");
         }
 

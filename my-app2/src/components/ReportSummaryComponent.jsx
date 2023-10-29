@@ -20,11 +20,11 @@ class ReportSummaryComponent extends Component {
             <div>
                 <NavBarComponent3 />
                 <Styles>
-                    <div class = "f">
-                        <div class = "container">
+                    <div className = "f">
+                        <div className = "container">
                             <h1><b>Resumen de pagos</b></h1>
                             {this.state.reportSummaries.length > 0 ? (
-                                <table class = "table table-striped table-bordered">
+                                <table className = "table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Rut</th>

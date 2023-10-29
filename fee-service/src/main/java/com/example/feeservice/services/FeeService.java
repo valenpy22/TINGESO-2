@@ -162,7 +162,7 @@ public class FeeService {
     public Double calculateTotalPriceByFees(String rut){
         List<FeeEntity> fees = feeRepository.getFeesByRut(rut);
 
-        double total_price = 0;
+        Double total_price = 0.0;
 
         for(FeeEntity fee : fees){
             total_price += fee.getPrice();

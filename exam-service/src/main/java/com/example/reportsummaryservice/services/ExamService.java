@@ -150,7 +150,11 @@ public class ExamService {
 
     public List<Object> calculateReportSummary(String rut){
         StudentModel studentModel = restTemplate.getForObject("http://student-service/students/"+rut, StudentModel.class);
+        //Puede que exista un error acá
+        System.out.println(1);
         Double final_price = restTemplate.getForObject("http://fee-service/fees/total-price-by-fees/"+rut, Double.class);
+
+        System.out.println(final_price);
         Integer total_fees = restTemplate.getForObject("http://fee-service/fees/count-fees/"+rut, Integer.class);
         Integer paid_fees = restTemplate.getForObject("http://fee-service/fees/count-paid-fees/"+rut, Integer.class);
         Double total_paid = restTemplate.getForObject("http://fee-service/fees/total-paid/"+rut, Double.class);
@@ -162,7 +166,7 @@ public class ExamService {
         report.add(rut);
         report.add(studentModel.getNames());
         report.add(studentModel.getSurnames());
-        report.add(getNumberOfExamsByRut(rut).toString());
+        report.add(getNumberOfExamsByRut(rut));
         report.add(getAverageScoreByRut(rut));
         report.add(final_price);
         report.add(studentModel.getPayment_method());

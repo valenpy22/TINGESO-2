@@ -18,7 +18,7 @@ class StudentService{
     }
 
     setMaxNumberOfFees(rut, number_of_fees){
-        return axios.post(`http://localhost:8080/students/set-max-number-of-fees/${rut}/${number_of_fees}`);
+        return axios.put(`http://localhost:8080/students/set-max-number-of-fees/${rut}/${number_of_fees}`);
     }
 }
 

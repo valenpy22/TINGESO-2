@@ -44,14 +44,14 @@ export default function GenerateFeeComponent(props){
                     rut: input.rut,
                     number_of_fees: input.number_of_fees,
                 };
-                
+
                 console.log("fees_generated => " + JSON.stringify(fees_generated));
-                StudentService.setMaxNumberOfFees(input.rut, input.number_of_fees).then((res) => {
-                    props.history.push("/generate-fees");
-                });
+                StudentService.setMaxNumberOfFees(input.rut, input.number_of_fees);
 
                 StudentService.getStudentByRut(input.rut).then((res) => {
                     let student = res.data;
+                    console.log("rut => " + JSON.stringify(student.rut));
+                    console.log("max_number_of_fees => " + JSON.stringify(student.number_of_fees));
                     console.log("student => " + JSON.stringify(student));
                     let max_number_of_fees = student.number_of_fees;
                     console.log("max_number_of_fees => " + JSON.stringify(max_number_of_fees));
