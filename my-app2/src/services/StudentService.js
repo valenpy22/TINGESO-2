@@ -13,8 +13,12 @@ class StudentService{
         return axios.delete(`http://localhost:8080/students/delete-all`);
     }
 
+    getStudentByRut(rut){
+        return axios.get(`http://localhost:8080/students/${rut}`);
+    }
+
     setMaxNumberOfFees(rut, number_of_fees){
-        
+        return axios.post(`http://localhost:8080/students/set-max-number-of-fees/${rut}/${number_of_fees}`);
     }
 }
 

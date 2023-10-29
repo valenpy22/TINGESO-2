@@ -44,6 +44,7 @@ export default function GenerateFeeComponent(props){
                     rut: input.rut,
                     number_of_fees: input.number_of_fees,
                 };
+                
                 console.log("fees_generated => " + JSON.stringify(fees_generated));
                 StudentService.setMaxNumberOfFees(input.rut, input.number_of_fees).then((res) => {
                     props.history.push("/generate-fees");

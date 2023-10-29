@@ -23,31 +23,45 @@ class ExamComponent extends Component{
     }
 
     onFileUpload = () => {
+
+        if(this.state.fule && this.state.file.name !== "students_exams.csv"){
+            swal("Nombre de archivo incorrecto", "El nombre del archivo debe ser 'students_exams.csv'", "error");
+            return;
+        }
+
         swal({
             title: "¿Está seguro de que desea cargar el archivo csv?",
-            text: "El nombre debe ser 'student_exams.csv', de lo contrario no se cargará",
+            text: "El nombre debe ser 'students_exams.csv', de lo contrario no se cargará",
             icon: "warning",
-            buttons: ["Canclear", "Cargar"],
+            buttons: ["Cancelar", "Cargar"],
             dangerMode: true,
         }).then(respuesta => {
             if(respuesta){
-                swal("Archivo cargado correctamente",
-                {
-                    icon: "success",
-                    timer: "2000",
-                });
                 const formData = new FormData();
-                formData.append("file", this.state.file);
-                ExamService.uploadFile(formData).then((res) => {
+            formData.append("file", this.state.file);
+            
+            ExamService.uploadFile(formData)
+                .then((res) => {
                     console.log(res);
+                    if (res.data && res.data.success) {
+                        swal("Archivo cargado correctamente", {
+                            icon: "success",
+                            timer: "2000",
+                        });
+                    }else{
+                        swal("Error al cargar el archivo", res.data.message || "Hubo un error", "error");
+                    }
+                })
+                .catch((error) => {
+                    swal("Error al cargar el archivo", "Hubo un error", "error");
                 });
-            }else{
-                swal("Archivo no cargado", {
-                    icon: "error",
-                    timer: "2000",
-                });
-            }
-        });
+        }else{
+            swal("Archivo no cargado", {
+                icon: "error",
+                timer: "2000",
+            });
+        }
+    });
     };
 
     render(){
@@ -74,7 +88,7 @@ class ExamComponent extends Component{
                     <hr>
                     </hr>
                     <div class="form1">
-                        <h5><b>Recuerde que el nombre del archivo debe ser "student_exams.csv"</b></h5>
+                        <h5><b>Recuerde que el nombre del archivo debe ser "students_exams.csv"</b></h5>
                     </div>
                 </Styles>
           </div>

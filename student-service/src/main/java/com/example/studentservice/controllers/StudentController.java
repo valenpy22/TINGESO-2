@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/students")
 public class StudentController {
     @Autowired
@@ -56,7 +57,7 @@ public class StudentController {
         return ResponseEntity.ok(fees);
     }
 
-    @PutMapping("/set-max-number-of-fees/{rut}/{number_of_fees}")
+    @PostMapping("/set-max-number-of-fees/{rut}/{number_of_fees}")
     public void setMaxNumberOfFees(@PathVariable("rut") String rut, @PathVariable("number_of_fees") Integer number_of_fees){
         studentService.setPaymentMethod(rut, number_of_fees);
     }

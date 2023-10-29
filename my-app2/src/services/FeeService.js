@@ -20,7 +20,7 @@ class FeeService{
     }
 
     generateFees(rut, number_of_fees){
-        return axios.post(`http://localhost:8080/fees/generate-fees/${rut}/${number_of_fees}`);
+        return axios.put(`http://localhost:8080/fees/generate-fees/${rut}/${number_of_fees}`);
     }
 
 }

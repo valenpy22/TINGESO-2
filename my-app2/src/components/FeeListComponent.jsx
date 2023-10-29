@@ -24,30 +24,34 @@ class FeeListComponent extends Component {
                     <div class="f">
                         <div class="container">
                             <h1><b>Lista de cuotas</b></h1>
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Rut</th>
-                                        <th>N° de cuota</th>
-                                        <th>Precio</th>
-                                        <th>Fecha de pago</th>
-                                        <th>Máxima fecha de pago</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.fees.map((fee) => (
-                                        <tr key={fee.id}>
-                                            <td>{fee.rut}</td>
-                                            <td>{fee.number_of_fee}</td>
-                                            <td>{fee.price}</td>
-                                            <td>{fee.payment_date}</td>
-                                            <td>{fee.max_payment_date}</td>
-                                            <td>{fee.state}</td>
+                            {this.state.fees.length > 0 ? (
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>N° de cuota</th>
+                                            <th>Precio</th>
+                                            <th>Fecha de pago</th>
+                                            <th>Máxima fecha de pago</th>
+                                            <th>Estado</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.fees.map((fee) => (
+                                            <tr key={fee.id}>
+                                                <td>{fee.rut}</td>
+                                                <td>{fee.number_of_fee}</td>
+                                                <td>{fee.price}</td>
+                                                <td>{fee.payment_date}</td>
+                                                <td>{fee.max_payment_date}</td>
+                                                <td>{fee.state}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <p>No hay cuotas registradas.</p>
+                            )}
                         </div>
                     </div>
                 </Styles>

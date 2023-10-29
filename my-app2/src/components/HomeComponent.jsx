@@ -8,77 +8,77 @@ export default function Home() {
             <GlobalStyle/>
             <HomeStyle>
                 <h1 className="text-center"><b>TopEducation</b></h1>
-                <div class="box-area">
-                    <div class="single-box">
+                <div classame="box-area">
+                    <div className="single-box">
                         <a href="/file-upload">
-                        <div class="img-area">
+                        <div className="img-area">
                         </div>
                         </a>
-                        <div class="img-text">
-                        <span class="header-text"><strong>Cargar información</strong></span>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Cargar información</strong></span>
                         </div>
                     </div>
-                    <div class="single-box">
+                    <div className="single-box">
                         <a href="/students">
-                        <div class="img-area">
+                        <div className="img-area">
                         </div>
                         </a>
-                        <div class="img-text">
-                        <span class="header-text"><strong>Ver estudiantes</strong></span>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Ver estudiantes</strong></span>
                         </div>
                     </div>
-                    <div class="single-box">
+                    <div className="single-box">
                         <a href="/list-fees">
-                        <div class="img-area">
+                        <div className="img-area">
                         </div>
                         </a>
-                        <div class="img-text">
-                        <span class="header-text"><strong>Listar cuotas</strong></span>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Listar cuotas</strong></span>
                         </div>
                     </div>
-                    <div class="single-box">
+                    <div className="single-box">
                         <a href="/report-summary">
-                        <div class="img-area">
+                        <div className="img-area">
                         </div>
                         </a>
-                        <div class="img-text">
-                        <span class="header-text"><strong>Obtener resumen de pagos</strong></span>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Obtener resumen de pagos</strong></span>
                         </div>
                     </div>
-                    <div class="single-box">
+                    <div className="single-box">
                         <a href="/new-student">
-                        <div class="img-area">
+                        <div className="img-area">
                         </div>
                         </a>
-                        <div class="img-text">
-                        <span class="header-text"><strong>Ingresar nuevo estudiante</strong></span>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Ingresar nuevo estudiante</strong></span>
                         </div>
                     </div>
-                    <div class="single-box">
+                    <div className="single-box">
                         <a href="/generate-fees">
-                        <div class="img-area">
+                        <div className="img-area">
                         </div>
                         </a>
-                        <div class="img-text">
-                        <span class="header-text"><strong>Generar cuotas</strong></span>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Generar cuotas</strong></span>
                         </div>
                     </div>
-                    <div class="single-box">
+                    <div className="single-box">
                         <a href="/discounts">
-                        <div class="img-area">
+                        <div className="img-area">
                         </div>
                         </a>
-                        <div class="img-text">
-                        <span class="header-text"><strong>Calcular planilla</strong></span>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Calcular planilla</strong></span>
                         </div>
                     </div>
-                    <div class="single-box">
+                    <div className="single-box">
                         <a href="/delete-all">
-                        <div class="img-area">
+                        <div className="img-area">
                         </div>
                         </a>
-                        <div class="img-text">
-                        <span class="header-text"><strong>Eliminar todo</strong></span>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Eliminar todo</strong></span>
                         </div>
                     </div>
                 </div>

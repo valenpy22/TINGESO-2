@@ -26,25 +26,29 @@ class FileInformationComponent extends Component {
                 <Styles>
                     <div class = "f">
                         <div class = "container">
-                            <h1><b>Información de archivos</b></h1>
-                            <table class = "table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Rut</th>
-                                        <th>Fecha</th>
-                                        <th>Puntaje</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.exams.map((exam) => (
-                                        <tr key={exam.id}>
-                                            <td>{exam.rut}</td>
-                                            <td>{exam.exam_date}</td>
-                                            <td>{exam.score}</td>
+                            <h1><b>Información de pruebas</b></h1>
+                            {this.state.exams.length > 0 ? (
+                                <table class = "table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>Fecha</th>
+                                            <th>Puntaje</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.exams.map((exam) => (
+                                            <tr key={exam.id}>
+                                                <td>{exam.rut}</td>
+                                                <td>{exam.exam_date}</td>
+                                                <td>{exam.score}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <p>No hay pruebas registradas.</p>
+                            )}
                         </div>
                     </div>
                 </Styles>

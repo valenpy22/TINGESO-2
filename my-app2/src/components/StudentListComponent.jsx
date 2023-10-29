@@ -14,6 +14,7 @@ class StudentListComponent extends Component{
         fetch("http://localhost:8080/students")
         .then((response) => response.json())
         .then((data) => this.setState({students: data}));
+    
     }
 
     render(){
@@ -21,41 +22,45 @@ class StudentListComponent extends Component{
             <div>
                 <NavBarComponent1/>
                 <Styles>
-                    <div class="f">
-                        <div class="container">
-                        <h1><b>Lista de estudiantes</b></h1>
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Rut</th>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Fecha de nacimiento</th>
-                                    <th>Tipo de colegio</th>
-                                    <th>Nombre del colegio</th>
-                                    <th>Año de egreso</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.students.map((student) => (
-                                    <tr key={student.id}>
-                                        <td>{student.rut}</td>
-                                        <td>{student.names}</td>
-                                        <td>{student.surnames}</td>
-                                        <td>{student.birthday}</td>
-                                        <td>{student.school_type}</td>
-                                        <td>{student.school_name}</td>
-                                        <td>{student.senior_year}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                    <div className="f">
+                        <div className="container">
+                            <h1><b>Lista de estudiantes</b></h1>
+                            {this.state.students.length > 0 ? (
+                                <table className="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Fecha de nacimiento</th>
+                                            <th>Tipo de colegio</th>
+                                            <th>Nombre del colegio</th>
+                                            <th>Año de egreso</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.students.map((student) => (
+                                            <tr key={student.id}>
+                                                <td>{student.rut}</td>
+                                                <td>{student.names}</td>
+                                                <td>{student.surnames}</td>
+                                                <td>{student.birthday}</td>
+                                                <td>{student.school_type}</td>
+                                                <td>{student.school_name}</td>
+                                                <td>{student.senior_year}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <p>No hay estudiantes registrados.</p>
+                            )}
                         </div>
                     </div>
                 </Styles>
             </div>
         );
-    }
+    }    
 }
 
 export default StudentListComponent;

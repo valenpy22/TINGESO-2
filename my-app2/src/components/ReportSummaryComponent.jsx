@@ -10,7 +10,7 @@ class ReportSummaryComponent extends Component {
         };
     }
     componentDidMount() {
-        fetch("http://localhost:8080/report-summary")
+        fetch("http://localhost:8080/exams/report-summaries")
             .then((response) => response.json())
             .then((data) => this.setState({ reportSummaries: data }));
     }
@@ -23,45 +23,49 @@ class ReportSummaryComponent extends Component {
                     <div class = "f">
                         <div class = "container">
                             <h1><b>Resumen de pagos</b></h1>
-                            <table class = "table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Rut</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Método de pago</th>
-                                        <th>N° de exámenes</th>
-                                        <th>Puntaje promedio</th>
-                                        <th>N° de cuotas</th>
-                                        <th>N° de cuotas pagadas</th>
-                                        <th>N° de cuotas atrasadas</th>
-                                        <th>Total pagado</th>
-                                        <th>Total deuda</th>
-                                        <th>Último pago</th>
-                                        <th>Precio final</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.reportSummaries.map((reportSummary) => (
-                                        <tr key={reportSummary.rut}>
-                                            <td>{reportSummary.rut}</td>
-                                            <td>{reportSummary.names}</td>
-                                            <td>{reportSummary.surnames}</td>
-                                            <td>{reportSummary.payment_method}</td>
-                                            <td>{reportSummary.exam_number}</td>
-                                            <td>{reportSummary.average_score}</td>
-                                            <td>{reportSummary.total_fees}</td>
-                                            <td>{reportSummary.paid_fees}</td>
-                                            <td>{reportSummary.late_fees}</td>
-                                            <td>{reportSummary.total_paid}</td>
-                                            <td>{reportSummary.total_debt}</td>
-                                            <td>{reportSummary.last_payment}</td>
-                                            <td>{reportSummary.final_price}</td>
+                            {this.state.reportSummaries.length > 0 ? (
+                                <table class = "table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Método de pago</th>
+                                            <th>N° de exámenes</th>
+                                            <th>Puntaje promedio</th>
+                                            <th>N° de cuotas</th>
+                                            <th>N° de cuotas pagadas</th>
+                                            <th>N° de cuotas atrasadas</th>
+                                            <th>Total pagado</th>
+                                            <th>Total deuda</th>
+                                            <th>Último pago</th>
+                                            <th>Precio final</th>
+                                            
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.reportSummaries.map((reportSummary) => (
+                                            <tr key={reportSummary.rut}>
+                                                <td>{reportSummary.rut}</td>
+                                                <td>{reportSummary.names}</td>
+                                                <td>{reportSummary.surnames}</td>
+                                                <td>{reportSummary.payment_method}</td>
+                                                <td>{reportSummary.exam_number}</td>
+                                                <td>{reportSummary.average_score}</td>
+                                                <td>{reportSummary.total_fees}</td>
+                                                <td>{reportSummary.paid_fees}</td>
+                                                <td>{reportSummary.late_fees}</td>
+                                                <td>{reportSummary.total_paid}</td>
+                                                <td>{reportSummary.total_debt}</td>
+                                                <td>{reportSummary.last_payment}</td>
+                                                <td>{reportSummary.final_price}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <p>No hay resúmenes de pagos registrados.</p>
+                            )}
                         </div>
                     </div>
                 </Styles>

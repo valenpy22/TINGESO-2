@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/exams")
 public class ExamController {
     @Autowired
@@ -23,12 +24,11 @@ public class ExamController {
     }
 
     @PostMapping("/file-upload")
-    public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
+    public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file){
         examService.save(file);
 
-        redirectAttributes.addFlashAttribute("messageFUS", "File uploaded succesfully");
         examService.readCSV("students_exams.csv");
-        return "redirect:/file-upload";
+        return ResponseEntity.ok("Bien");
     }
 
     @GetMapping("/file-information")

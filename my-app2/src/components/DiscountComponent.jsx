@@ -11,7 +11,7 @@ class DiscountComponent extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/discounts")
+        fetch("http://localhost:8080/exams/discounts")
             .then((response) => response.json())
             .then((data) => this.setState({ discounts: data }));
     }
@@ -24,30 +24,34 @@ class DiscountComponent extends Component {
                     <div class="f">
                         <div class="container">
                             <h1><b>Lista de descuentos</b></h1>
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Rut</th>
-                                        <th>Descuento tipo de colegio</th>
-                                        <th>Descuento año de egreso</th>
-                                        <th>Descuento puntaje promedio</th>
-                                        <th>Intereses meses de atraso</th>
-                                        <th>Valor total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.discounts.map((discount) => (
-                                        <tr key={discount.rut}>
-                                            <td>{discount.rut}</td>
-                                            <td>{discount.discount_type_school}</td>
-                                            <td>{discount.discount_senior_year}</td>
-                                            <td>{discount.discount_average_score}</td>
-                                            <td>{discount.interest_months_late}</td>
-                                            <td>{discount.total_price}</td>
+                            {this.state.discounts.length > 0 ? (
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Rut</th>
+                                            <th>Descuento tipo de colegio</th>
+                                            <th>Descuento año de egreso</th>
+                                            <th>Descuento puntaje promedio</th>
+                                            <th>Intereses meses de atraso</th>
+                                            <th>Valor total</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.discounts.map((discount) => (
+                                            <tr key={discount.rut}>
+                                                <td>{discount.rut}</td>
+                                                <td>{discount.discount_type_school}</td>
+                                                <td>{discount.discount_senior_year}</td>
+                                                <td>{discount.discount_average_score}</td>
+                                                <td>{discount.interest_months_late}</td>
+                                                <td>{discount.total_price}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <p>No hay descuentos registrados.</p>
+                            )}
                         </div>
                     </div>
                 </Styles>
