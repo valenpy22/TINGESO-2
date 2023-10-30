@@ -21,11 +21,11 @@ class FeeListComponent extends Component {
             <div>
                 <NavBarComponent3 />
                 <Styles>
-                    <div class="f">
-                        <div class="container">
+                    <div className="f">
+                        <div className="container">
                             <h1><b>Lista de cuotas</b></h1>
                             {this.state.fees.length > 0 ? (
-                                <table class="table table-striped table-bordered">
+                                <table className="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Rut</th>

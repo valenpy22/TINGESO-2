@@ -5,12 +5,12 @@ function NavBarComponent3(){
     return(
         <>
         <NavStyle>
-            <header class="header">
-                <div class="logo">
+            <header className="header">
+                <div className="logo">
                     <h1>TopEducation</h1>
                 </div>
                 <nav>
-                    <a class="btn" href="/"><button>Volver al menú</button></a>
+                    <a className="btn" href="/"><button>Volver al menú</button></a>
                 </nav>
             </header>
         </NavStyle>
