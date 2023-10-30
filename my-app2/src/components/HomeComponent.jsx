@@ -1,14 +1,34 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import NavBarComponent4 from "./NavBarComponent4";
 
 export default function Home() {
     return (
         <div>
+            <NavBarComponent4 />
             <GlobalStyle/>
             <HomeStyle>
-                <h1 className="text-center"><b>TopEducation</b></h1>
-                <div classame="box-area">
+                <h1 className="text-center"><b>Bienvenido a TopEducation</b></h1>
+                <div className="box-area">
+                    <div className="single-box">
+                        <a href="/new-student">
+                        <div className="img-area">
+                        </div>
+                        </a>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Ingresar nuevo estudiante</strong></span>
+                        </div>
+                    </div>
+                    <div className="single-box">
+                        <a href="/generate-fees">
+                        <div className="img-area">
+                        </div>
+                        </a>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Generar cuotas</strong></span>
+                        </div>
+                    </div>
                     <div className="single-box">
                         <a href="/file-upload">
                         <div className="img-area">
@@ -37,39 +57,21 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="single-box">
-                        <a href="/report-summary">
-                        <div className="img-area">
-                        </div>
-                        </a>
-                        <div className="img-text">
-                        <span className="header-text"><strong>Obtener resumen de pagos</strong></span>
-                        </div>
-                    </div>
-                    <div className="single-box">
-                        <a href="/new-student">
-                        <div className="img-area">
-                        </div>
-                        </a>
-                        <div className="img-text">
-                        <span className="header-text"><strong>Ingresar nuevo estudiante</strong></span>
-                        </div>
-                    </div>
-                    <div className="single-box">
-                        <a href="/generate-fees">
-                        <div className="img-area">
-                        </div>
-                        </a>
-                        <div className="img-text">
-                        <span className="header-text"><strong>Generar cuotas</strong></span>
-                        </div>
-                    </div>
-                    <div className="single-box">
                         <a href="/discounts">
                         <div className="img-area">
                         </div>
                         </a>
                         <div className="img-text">
                         <span className="header-text"><strong>Calcular planilla</strong></span>
+                        </div>
+                    </div>
+                    <div className="single-box">
+                        <a href="/report-summary">
+                        <div className="img-area">
+                        </div>
+                        </a>
+                        <div className="img-text">
+                        <span className="header-text"><strong>Obtener resumen de pagos</strong></span>
                         </div>
                     </div>
                     <div className="single-box">
@@ -105,6 +107,7 @@ const HomeStyle = styled.nav`
 .box-area {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -115,7 +118,7 @@ const HomeStyle = styled.nav`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 400px;
+    width: 350px;
     height: auto;
     border-radius: 4px;
     background-color: white;
@@ -131,8 +134,7 @@ const HomeStyle = styled.nav`
     align-items: center;
     width: 80px;
     height: 80px;
-    border: 6px solid #ddd;
-    border-radius: 50%;
+    border-radius: 10%;
     padding: 20px;
     -webkit-background-size: cover;
     background-size: cover;

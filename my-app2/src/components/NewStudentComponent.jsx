@@ -5,6 +5,7 @@ import StudentService from "../services/StudentService";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
+import InputMask from 'react-input-mask';
 
 export default function NewStudentComponent(props){
     const initialState = {
@@ -126,7 +127,14 @@ export default function NewStudentComponent(props){
                                     {/* Para la fecha de nacimiento quiero que el formato sea dd-MM-yyyy*/}
                                     <Form.Group className="mb-3" controlId="birthday" value = {input.birthday} onChange={changeBirthdayHandler}>
                                         <Form.Label>Fecha de nacimiento</Form.Label>
-                                        <Form.Control type="date" placeholder="Ingrese la fecha de nacimiento del estudiante" />
+                                        <InputMask
+                                            mask="99-99-9999" 
+                                            placeholder="dd-mm-yyyy" 
+                                            value={input.birthday} 
+                                            onChange={changeBirthdayHandler}
+                                        >
+                                            {(inputProps) => <Form.Control {...inputProps} type="text" />}
+                                        </InputMask>
                                     </Form.Group>
 
                                     {/* Para el tipo de colegio quiero que se desplieguen 3 opciones: Municipal, Subvencionado y Privado: */}
@@ -187,6 +195,7 @@ const Styles = styled.div`
 .mainclass{
     margin-top: 20px;
     display: flex;
+    padding: 0 5%;
     justify-content: center;
     font-family: Roboto, Arial, sans-serif;
     font-size: 15px;
@@ -194,8 +203,9 @@ const Styles = styled.div`
 
 .form1{
     background-color: #f0f0f0;
-    width: 50%;
+    width: 40%;
     padding: 40px;
+    margin: 0 auto;
 }
 
 input[type=rut], input[type=date], input[type=text], select, textarea {
@@ -222,7 +232,7 @@ Button:hover {
 
 .formcontainer {
     text-align: left;
-    margin: 24px 100px 9px;
+    margin: 24px 50px 9px;
 }
 
 .container {

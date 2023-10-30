@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import NavBarComponent2 from "./NavBarComponent2";
+import NavBarComponent5 from "./NavBarComponent5";
 import styled from "styled-components";
 import FeeService from "../services/FeeService";
 import StudentService from "../services/StudentService";
@@ -55,6 +55,7 @@ export default function GenerateFeeComponent(props){
                     console.log("rut => " + JSON.stringify(student.rut));
                     console.log("max_number_of_fees => " + JSON.stringify(student.number_of_fees));
                     console.log("student => " + JSON.stringify(student));
+                    //Aquí ocurre un error al intentar acceder a los números de las cuotas
                     let max_number_of_fees = student.number_of_fees;
                     console.log("max_number_of_fees => " + JSON.stringify(max_number_of_fees));
                     FeeService.generateFees(input.rut, max_number_of_fees).then((res) => {
@@ -76,7 +77,7 @@ export default function GenerateFeeComponent(props){
     return(
         <Styles>
             <div className="home">
-                <NavBarComponent2 />
+                <NavBarComponent5 />
                 <div className="mainclass">
                     <div className="form1">
                         <h1 className="text-center"><b>Generar cuotas a estudiante</b></h1>
