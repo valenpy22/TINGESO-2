@@ -25,6 +25,8 @@ export default function GenerateFeeComponent(props){
         console.log(input.number_of_fees);
     };
 
+    //Comment
+
     const generateFees = (e) => {
         e.preventDefault();
         swal({
