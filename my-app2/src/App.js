@@ -11,6 +11,7 @@ import FeeListComponent from './components/FeeListComponent';
 import ReportSummaryComponent from './components/ReportSummaryComponent';
 import DiscountComponent from './components/DiscountComponent';
 import FileInformationComponent from './components/FileInformationComponent';
+import DeleteAllComponent from './components/DeleteAllComponent';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path = "/report-summary" element={<ReportSummaryComponent/>}></Route>
           <Route path = "/discounts" element={<DiscountComponent/>}></Route>
           <Route path = "/file-information" element = {<FileInformationComponent/>}></Route>
+          <Route path = "/delete-all" element = {<DeleteAllComponent/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

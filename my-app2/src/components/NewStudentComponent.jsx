@@ -6,8 +6,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
 import InputMask from 'react-input-mask';
+import {useNavigate} from 'react-router-dom'
 
 export default function NewStudentComponent(props){
+    const navigate = useNavigate();
+
     const initialState = {
         rut: "",
         names: "",
@@ -85,10 +88,13 @@ export default function NewStudentComponent(props){
                     number_of_fees: "",
                     final_price: "",
                 };
+
+
                 console.log("student => " + JSON.stringify(student));
                 StudentService.saveStudent(student).then((res) => {
-                    props.history.push("/students");
+                    window.location.reload();
                 });
+                
             }else{
                 swal("Estudiante no registrado", {
                     icon: "error",
@@ -97,6 +103,8 @@ export default function NewStudentComponent(props){
             }
         });
     };
+
+    
 
     return(
         <Styles>
@@ -167,6 +175,7 @@ export default function NewStudentComponent(props){
         </Styles>
     )
 }
+
 
 const Styles = styled.div`
 

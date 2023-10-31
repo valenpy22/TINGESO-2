@@ -12,9 +12,20 @@ class StudentListComponent extends Component{
 
     componentDidMount(){
         fetch("http://localhost:8080/students")
-        .then((response) => response.json())
-        .then((data) => this.setState({students: data}));
-    
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();  // <-- Cambia json() a text()
+        })
+        .then((data) => {
+            if (data) {  // <-- Verifica si la respuesta no está vacía
+                this.setState({ students: JSON.parse(data) });  // <-- Analiza la respuesta
+            } 
+        })
+        .catch((error) => {
+            console.log("Error fetching the students: ", error);
+        });
     }
 
     render(){
@@ -39,8 +50,8 @@ class StudentListComponent extends Component{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.students.map((student) => (
-                                            <tr key={student.id}>
+                                        {this.state.students.map((student, index) => (
+                                            <tr key={index}>
                                                 <td>{student.rut}</td>
                                                 <td>{student.names}</td>
                                                 <td>{student.surnames}</td>

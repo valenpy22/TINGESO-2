@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import NavBarComponent5 from "./NavBarComponent5";
 import styled from "styled-components";
 import FeeService from "../services/FeeService";
@@ -6,12 +6,15 @@ import StudentService from "../services/StudentService";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
+import { useNavigate } from "react-router-dom";
 
 export default function GenerateFeeComponent(props){
+    const navigate = useNavigate();
     const initialState = {
         rut: "",
         number_of_fees: "",
     }
+    const form = useRef();
 
     const [input, setInput] = useState(initialState);
 
@@ -19,6 +22,7 @@ export default function GenerateFeeComponent(props){
         setInput({...input, rut: event.target.value});
         console.log(input.rut);
     };
+
 
     const changeNumberOfFeesHandler = (event) => {
         setInput({...input, number_of_fees: event.target.value});
@@ -42,27 +46,20 @@ export default function GenerateFeeComponent(props){
                     icon: "success",
                     timer: "2000",
                 });
+
                 let fees_generated = {
                     rut: input.rut,
                     number_of_fees: input.number_of_fees,
                 };
 
-                console.log("fees_generated => " + JSON.stringify(fees_generated));
-                StudentService.setMaxNumberOfFees(input.rut, input.number_of_fees);
 
                 StudentService.getStudentByRut(input.rut).then((res) => {
                     let student = res.data;
-                    console.log("rut => " + JSON.stringify(student.rut));
                     console.log("max_number_of_fees => " + JSON.stringify(student.number_of_fees));
-                    console.log("student => " + JSON.stringify(student));
-                    //Aquí ocurre un error al intentar acceder a los números de las cuotas
-                    let max_number_of_fees = student.number_of_fees;
-                    console.log("max_number_of_fees => " + JSON.stringify(max_number_of_fees));
-                    FeeService.generateFees(input.rut, max_number_of_fees).then((res) => {
-                        props.history.push("/generate-fees");
-                    }
-                    );
                 });
+
+                StudentService.generateFees(input.rut, input.number_of_fees);
+            
 
             
             }else{
@@ -72,6 +69,7 @@ export default function GenerateFeeComponent(props){
                 });
             }
         });
+        
     };
 
     return(

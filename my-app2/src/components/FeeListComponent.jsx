@@ -37,8 +37,8 @@ class FeeListComponent extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.fees.map((fee) => (
-                                            <tr key={fee.id}>
+                                        {this.state.fees.map((fee, index) => (
+                                            <tr key={index}>
                                                 <td>{fee.rut}</td>
                                                 <td>{fee.number_of_fee}</td>
                                                 <td>{fee.price}</td>

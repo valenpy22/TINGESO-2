@@ -150,11 +150,7 @@ public class ExamService {
 
     public List<Object> calculateReportSummary(String rut){
         StudentModel studentModel = restTemplate.getForObject("http://student-service/students/"+rut, StudentModel.class);
-        //Puede que exista un error acá
-        System.out.println(1);
         Double final_price = restTemplate.getForObject("http://fee-service/fees/total-price-by-fees/"+rut, Double.class);
-
-        System.out.println(final_price);
         Integer total_fees = restTemplate.getForObject("http://fee-service/fees/count-fees/"+rut, Integer.class);
         Integer paid_fees = restTemplate.getForObject("http://fee-service/fees/count-paid-fees/"+rut, Integer.class);
         Double total_paid = restTemplate.getForObject("http://fee-service/fees/total-paid/"+rut, Double.class);
@@ -181,13 +177,17 @@ public class ExamService {
     }
 
     public List<Object> calculateDiscount(String rut){
-        StudentModel studentModel = restTemplate.getForObject("http://student-service/students/"+rut, StudentModel.class);
         Double discount_senior_year = restTemplate.getForObject("http://student-service/students/calculate-discount-senior-year/"+rut, Double.class);
         Double discount_school_type = restTemplate.getForObject("http://student-service/students/calculate-discount-school-type/"+rut, Double.class);
         String last_exam_date = getLastExamDate(rut);
         Double average_score = getAverageScoreByRutAndMonth(rut, last_exam_date);
+
         Double discount_average_score = restTemplate.getForObject("http://fee-service/fees/score-discount/"+rut+"/"+average_score, Double.class);
+        restTemplate.put("http://fee-service/fees/score-discount/"+rut+"/"+average_score+"/put", Double.class);
         Double interest_months_late = restTemplate.getForObject("http://fee-service/fees/interest-months-late/"+rut, Double.class);
+        restTemplate.put("http://fee-service/fees/interest-months-late/"+rut+"/put", Double.class);
+        Double total_price_by_fees = restTemplate.getForObject("http://fee-service/fees/total-price-by-fees/"+rut, Double.class);
+        restTemplate.put("http://student-service/students/set-final-price/"+rut+"/"+total_price_by_fees, Double.class);
 
         ArrayList<Object> discount = new ArrayList<>();
 
@@ -196,7 +196,7 @@ public class ExamService {
         discount.add(discount_senior_year);
         discount.add(discount_average_score);
         discount.add(interest_months_late);
-        discount.add(studentModel.getFinal_price());
+        discount.add(total_price_by_fees);
 
         return discount;
     }

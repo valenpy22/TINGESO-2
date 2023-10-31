@@ -27,7 +27,7 @@ public class FeeController {
 
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<FeeEntity>> getFees(){
         List<FeeEntity> fees = feeService.getAllFees();
         if(fees.isEmpty()){
@@ -62,9 +62,14 @@ public class FeeController {
         return ResponseEntity.ok(feeService.countMonthsLate(rut));
     }
 
-    @PutMapping("/score-discount/{rut}/{average_score}")
-    public ResponseEntity<Double> applyAverageScoreDiscountToFees(@PathVariable("rut") String rut, @PathVariable("average_score") double average_score){
-        return ResponseEntity.ok(feeService.calculateDiscountOnFeesByAverageScore(rut, average_score));
+    @PutMapping("/score-discount/{rut}/{average_score}/put")
+    public void applyAverageScoreDiscountToFees(@PathVariable("rut") String rut, @PathVariable("average_score") Double average_score){
+        feeService.calculateDiscountOnFeesByAverageScore(rut, average_score);
+    }
+
+    @GetMapping("/score-discount/{rut}/{average_score}")
+    public ResponseEntity<Double> getAverageScoreDiscountToFees(@PathVariable("rut") String rut, @PathVariable("average_score") Double average_score){
+        return ResponseEntity.ok(feeService.getDiscountOnFeesByAverageScore(rut, average_score));
     }
 
     @GetMapping("/total-price-by-fees/{rut}")
@@ -105,15 +110,24 @@ public class FeeController {
         return ResponseEntity.ok(feeService.countLateFees(rut));
     }
 
-    @PutMapping("/generate-fees/{rut}/{number_of_fees}")
-    public void generateFees(@PathVariable("rut") String rut, @PathVariable("number_of_fees") int number_of_fees){
+    @PostMapping("/generate-fees/{rut}/{number_of_fees}")
+    public ResponseEntity<Boolean> generateFees(@PathVariable("rut") String rut, @PathVariable("number_of_fees") Integer number_of_fees){
         feeService.generateFees(rut, number_of_fees);
+        if(feeService.getAllFees().isEmpty()){
+            return ResponseEntity.ok(false);
+        }
+        return ResponseEntity.ok(true);
     }
 
-    @PutMapping("/interest-months-late/{rut}")
-    public ResponseEntity<Double> calculateInterestByMonthsLate(@PathVariable("rut") String rut){
-        double interest_months_late = feeService.calculateInterestByMonthsLate(rut);
+    @GetMapping("/interest-months-late/{rut}")
+    public ResponseEntity<Double> getInterestByMonthsLate(@PathVariable("rut") String rut){
+        double interest_months_late = feeService.getInterestByMonthsLate(rut);
         return ResponseEntity.ok(interest_months_late);
+    }
+
+    @PutMapping("/interest-months-late/{rut}/put")
+    public void calculateInterestByMonthsLate(@PathVariable("rut") String rut){
+        feeService.calculateInterestByMonthsLate(rut);
     }
 
 }

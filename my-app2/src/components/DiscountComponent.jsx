@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBarComponent3 from "./NavBarComponent3";
 import styled from "styled-components";
+import { Button } from "react-bootstrap";
 
 class DiscountComponent extends Component {
     constructor(props) {
@@ -12,20 +13,60 @@ class DiscountComponent extends Component {
 
     componentDidMount() {
         fetch("http://localhost:8080/exams/discounts")
-            .then((response) => response.json())
-            .then((data) => this.setState({ discounts: data }));
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();  // <-- Cambia json() a text()
+        })
+        .then((data) => {
+            if (data) {  // <-- Verifica si la respuesta no está vacía
+                this.setState({ discounts: JSON.parse(data) });  // <-- Analiza la respuesta
+            } 
+        })
+        .catch((error) => {
+            console.log("Error fetching the discounts: ", error);
+        });
     }
+
+
+    //Recorrer toda la lista de discounts e imprimir por consola
+    //el rut y el total_price de cada uno de ellos.
+
+    consoleDiscounts() {
+        console.log("discounts => " + JSON.stringify(this.state.discounts));
+        this.state.discounts.map((discount) => {
+            console.log("rut => " + JSON.stringify(discount.rut));
+            console.log("total_price => " + JSON.stringify(discount.total_price));
+        });
+    }
+
+    async calculateDiscounts() {
+        const requestOptions = {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(this.state.discounts),
+        };
+        const response = await fetch(
+            "http://localhost:8080/exams/discounts",
+            requestOptions
+        );
+        const data = await response.json();
+        this.setState({ discounts: data });
+    }
+
+
 
     render() {
         return (
             <div>
                 <NavBarComponent3 />
                 <Styles>
-                    <div class="f">
-                        <div class="container">
+                    <div className="f">
+                        <div className="container">
                             <h1><b>Lista de descuentos</b></h1>
                             {this.state.discounts.length > 0 ? (
-                                <table class="table table-striped table-bordered">
+                                <table className="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Rut</th>
@@ -37,14 +78,14 @@ class DiscountComponent extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.discounts.map((discount) => (
-                                            <tr key={discount.rut}>
-                                                <td>{discount.rut}</td>
-                                                <td>{discount.discount_type_school}</td>
-                                                <td>{discount.discount_senior_year}</td>
-                                                <td>{discount.discount_average_score}</td>
-                                                <td>{discount.interest_months_late}</td>
-                                                <td>{discount.total_price}</td>
+                                        {this.state.discounts.map((discount, index) => (
+                                            <tr key={index}>
+                                                <td>{discount[0]}</td>
+                                                <td>{discount[1]}</td>
+                                                <td>{discount[2]}</td>
+                                                <td>{discount[3]}</td>
+                                                <td>{discount[4]}</td>
+                                                <td>{discount[5]}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -52,6 +93,9 @@ class DiscountComponent extends Component {
                             ) : (
                                 <p>No hay descuentos registrados.</p>
                             )}
+                            {/*Botón para calcular la planilla de descuentos con el tipo PUT */}
+
+                            <Button onClick={this.calculateDiscounts}>Calcular planilla</Button>
                         </div>
                     </div>
                 </Styles>

@@ -19,9 +19,6 @@ class FeeService{
         return axios.delete(`http://localhost:8080/fees/delete-all`);
     }
 
-    generateFees(rut, number_of_fees){
-        return axios.put(`http://localhost:8080/fees/generate-fees/${rut}/${number_of_fees}`);
-    }
 
 }
 

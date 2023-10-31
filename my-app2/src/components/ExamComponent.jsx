@@ -43,7 +43,7 @@ class ExamComponent extends Component{
             ExamService.uploadFile(formData)
                 .then((res) => {
                     console.log(res);
-                    if (res.data && res.data.success) {
+                    if (res.data === "Bien") {
                         swal("Archivo cargado correctamente", {
                             icon: "success",
                             timer: "2000",
@@ -69,8 +69,8 @@ class ExamComponent extends Component{
             <div className="home">
                 <NavBarComponent1/>
                 <Styles>
-                    <div class="f">
-                        <div class="container">
+                    <div className="f">
+                        <div className="container">
                         <h1><b>Cargar el archivo de datos</b></h1>
                         <Row className="mt-4">
                             <Col col="12">
@@ -87,7 +87,7 @@ class ExamComponent extends Component{
                     </br>
                     <hr>
                     </hr>
-                    <div class="form1">
+                    <div className="form1">
                         <h5><b>Recuerde que el nombre del archivo debe ser "students_exams.csv"</b></h5>
                     </div>
                 </Styles>

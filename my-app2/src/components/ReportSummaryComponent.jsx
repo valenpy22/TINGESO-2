@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBarComponent3 from "./NavBarComponent3";
 import styled from "styled-components";
+import { Button } from "react-bootstrap";
 
 class ReportSummaryComponent extends Component {
     constructor(props) {
@@ -11,8 +12,34 @@ class ReportSummaryComponent extends Component {
     }
     componentDidMount() {
         fetch("http://localhost:8080/exams/report-summaries")
-            .then((response) => response.json())
-            .then((data) => this.setState({ reportSummaries: data }));
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();  // <-- Cambia json() a text()
+        })
+        .then((data) => {
+            if (data) {  // <-- Verifica si la respuesta no está vacía
+                this.setState({ reportSummaries: JSON.parse(data) });  // <-- Analiza la respuesta
+            } 
+        })
+        .catch((error) => {
+            console.log("Error fetching the discounts: ", error);
+        });
+    }
+
+    async calculateReportSummaries() {
+        const requestOptions = {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(this.state.reportSummaries),
+        };
+        const response = await fetch(
+            "http://localhost:8080/exams/report-summaries",
+            requestOptions
+        );
+        const data = await response.json();
+        this.setState({ reportSummaries: data });
     }
 
     render(){
@@ -44,21 +71,8 @@ class ReportSummaryComponent extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.reportSummaries.map((reportSummary) => (
-                                            <tr key={reportSummary.rut}>
-                                                <td>{reportSummary.rut}</td>
-                                                <td>{reportSummary.names}</td>
-                                                <td>{reportSummary.surnames}</td>
-                                                <td>{reportSummary.payment_method}</td>
-                                                <td>{reportSummary.exam_number}</td>
-                                                <td>{reportSummary.average_score}</td>
-                                                <td>{reportSummary.total_fees}</td>
-                                                <td>{reportSummary.paid_fees}</td>
-                                                <td>{reportSummary.late_fees}</td>
-                                                <td>{reportSummary.total_paid}</td>
-                                                <td>{reportSummary.total_debt}</td>
-                                                <td>{reportSummary.last_payment}</td>
-                                                <td>{reportSummary.final_price}</td>
+                                        {this.state.reportSummaries.map((reportSummary, index) => (
+                                            <tr key={index}> {reportSummary}
                                             </tr>
                                         ))}
                                     </tbody>
@@ -66,6 +80,8 @@ class ReportSummaryComponent extends Component {
                             ) : (
                                 <p>No hay resúmenes de pagos registrados.</p>
                             )}
+                            {/* Botón para calcular resumenes de pagos*/}
+                            <Button onClick={this.calculateReportSummaries}>Calcular resumen</Button>
                         </div>
                     </div>
                 </Styles>

@@ -86,6 +86,7 @@ public class FeeService {
         int fee_count = 1;
 
         for(int i = month; i < number_of_fees + month; i++){
+            System.out.println(i);
             int currentMonth = (i%12) + 1;
             int currentYear = getYear() + (i / 12);
 
@@ -99,10 +100,10 @@ public class FeeService {
             }else{
                 fee.setMax_date_payment("10/" + currentMonth + "/" + currentYear);
             }
-            calculateEachFeePriceByPrincipalDiscounts(rut);
             saveFee(fee);
             fee_count++;
         }
+        calculateEachFeePriceByPrincipalDiscounts(rut);
     }
 
     public Integer getMonth(){
@@ -156,6 +157,9 @@ public class FeeService {
 
     public String getLastPaymentDate(String rut){
         FeeEntity fee = feeRepository.getFeeByRutOrderByPaymentDateDesc(rut);
+        if(fee.getPayment_date().isEmpty()){
+            return "";
+        }
         return fee.getPayment_date();
     }
 
@@ -231,7 +235,27 @@ public class FeeService {
         feeRepository.save(fee);
     }
 
-    public Double calculateInterestByMonthsLate(String rut){
+    public void calculateInterestByMonthsLate(String rut){
+        Integer months_late = countMonthsLate(rut);
+        List<FeeEntity> fees = feeRepository.getFeesByRut(rut);
+
+        for(FeeEntity fee : fees){
+            if(isFeeLate(fee)){
+                if(months_late > 3){
+                    fee.setPrice(fee.getPrice()*1.15);
+                }else if(months_late == 3){
+                    fee.setPrice(fee.getPrice()*1.09);
+                }else if(months_late == 2){
+                    fee.setPrice(fee.getPrice()*1.06);
+                }else if(months_late == 1){
+                    fee.setPrice(fee.getPrice()*1.03);
+                }
+            }
+            feeRepository.save(fee);
+        }
+    }
+
+    public Double getInterestByMonthsLate(String rut){
         Integer months_late = countMonthsLate(rut);
         List<FeeEntity> fees = feeRepository.getFeesByRut(rut);
         double total_interest = 0.0;
@@ -240,37 +264,34 @@ public class FeeService {
             if(isFeeLate(fee)){
                 if(months_late > 3){
                     total_interest = fee.getPrice()*0.15;
-                    fee.setPrice(fee.getPrice()*1.15);
                 }else if(months_late == 3){
                     total_interest = fee.getPrice()*0.09;
-                    fee.setPrice(fee.getPrice()*1.09);
                 }else if(months_late == 2){
                     total_interest = fee.getPrice()*0.06;
-                    fee.setPrice(fee.getPrice()*1.06);
                 }else if(months_late == 1){
                     total_interest = fee.getPrice()*0.03;
-                    fee.setPrice(fee.getPrice()*1.03);
                 }
             }
-            feeRepository.save(fee);
         }
         return total_interest;
     }
 
     public void calculateEachFeePriceByPrincipalDiscounts(String rut){
         StudentModel student = restTemplate.getForObject("http://student-service/students/"+rut, StudentModel.class);
+        System.out.println(student.getPayment_method());
         if(student.getPayment_method().equals("Cuotas")){
             List<FeeEntity> fees = getFeesByRut(rut);
             Double fee_price = student.getFinal_price()/student.getNumber_of_fees();
 
             for(FeeEntity fee : fees){
+                System.out.println(fee_price);
                 fee.setPrice(fee_price);
                 saveFee(fee);
             }
         }
     }
 
-    public Double calculateDiscountOnFeesByAverageScore(String rut, Double average_score){
+    public void calculateDiscountOnFeesByAverageScore(String rut, Double average_score){
         List<FeeEntity> fees = getFeesByRut(rut);
         double discount_average_score = 0.0;
 
@@ -289,6 +310,24 @@ public class FeeService {
                 saveFee(fee);
             }
         }
+    }
+
+    public Double getDiscountOnFeesByAverageScore(String rut, Double average_score){
+        List<FeeEntity> fees = getFeesByRut(rut);
+        double discount_average_score = 0.0;
+
+        for(FeeEntity fee : fees){
+            if(fee.getState().equals("PENDING")){
+                if(average_score >= 950 && average_score <= 1000){
+                    discount_average_score = fee.getPrice()*0.1;
+                }else if(average_score >= 900 && average_score < 950){
+                    discount_average_score = fee.getPrice()*0.05;
+                }else if(average_score >= 850 && average_score < 900){
+                    discount_average_score = fee.getPrice()*0.02;
+                }
+            }
+        }
+
         return discount_average_score;
     }
 
