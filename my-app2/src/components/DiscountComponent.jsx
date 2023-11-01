@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import NavBarComponent3 from "./NavBarComponent3";
 import styled from "styled-components";
-import { Button } from "react-bootstrap";
 
 class DiscountComponent extends Component {
     constructor(props) {
@@ -29,17 +28,6 @@ class DiscountComponent extends Component {
         });
     }
 
-
-    //Recorrer toda la lista de discounts e imprimir por consola
-    //el rut y el total_price de cada uno de ellos.
-
-    consoleDiscounts() {
-        console.log("discounts => " + JSON.stringify(this.state.discounts));
-        this.state.discounts.map((discount) => {
-            console.log("rut => " + JSON.stringify(discount.rut));
-            console.log("total_price => " + JSON.stringify(discount.total_price));
-        });
-    }
 
     async calculateDiscounts() {
         const requestOptions = {
@@ -95,7 +83,7 @@ class DiscountComponent extends Component {
                             )}
                             {/*Botón para calcular la planilla de descuentos con el tipo PUT */}
 
-                            <Button onClick={this.calculateDiscounts}>Calcular planilla</Button>
+                            <button className="boton" onClick={this.calculateDiscounts}>Calcular planilla</button>
                         </div>
                     </div>
                 </Styles>
@@ -168,5 +156,31 @@ const Styles = styled.div`
 .content-table tbody tr.active-row{
     font-weight: bold;
     color: #009879;
+}
+.container{
+    text-align: center;
+    justify-content: center;
+    padding-top: 30px;
+    line-height: 3;
+
+}
+.boton{
+    background-color: #3D30A2;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 40px;
+    padding: 5px;
+    width: 150px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin: 4px 2px;
 }
 `

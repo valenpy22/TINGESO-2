@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import NavBarComponent3 from "./NavBarComponent3";
 import styled from "styled-components";
-import { Button } from "react-bootstrap";
 
 class ReportSummaryComponent extends Component {
     constructor(props) {
@@ -81,7 +80,7 @@ class ReportSummaryComponent extends Component {
                                 <p>No hay resúmenes de pagos registrados.</p>
                             )}
                             {/* Botón para calcular resumenes de pagos*/}
-                            <Button onClick={this.calculateReportSummaries}>Calcular resumen</Button>
+                            <button className="boton" onClick={this.calculateReportSummaries}>Calcular resumen</button>
                         </div>
                     </div>
                 </Styles>
@@ -154,5 +153,32 @@ const Styles = styled.div`
 .content-table tbody tr.active-row{
     font-weight: bold;
     color: #009879;
+}
+
+.container{
+    text-align: center;
+    justify-content: center;
+    padding-top: 30px;
+    line-height: 3;
+}
+
+.boton{
+    background-color: #3D30A2;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 40px;
+    padding: 5px;
+    width: 150px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin: 4px 2px;
 }
 `

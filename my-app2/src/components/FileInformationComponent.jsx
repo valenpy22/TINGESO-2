@@ -1,9 +1,6 @@
-import React, {Component, useState} from "react";
+import React, {Component} from "react";
 import NavBarComponent3 from "./NavBarComponent3";
 import styled from "styled-components";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import swal from 'sweetalert';
 
 class FileInformationComponent extends Component {
     constructor(props){
@@ -122,5 +119,10 @@ const Styles = styled.div`
 .content-table tbody tr.active-row{
     font-weight: bold;
     color: #009879;
+}
+.container{
+    text-align: center;
+    padding-top: 30px;
+    line-height: 3;
 }
 `

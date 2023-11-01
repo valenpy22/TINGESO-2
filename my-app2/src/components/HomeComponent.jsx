@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import NavBarComponent4 from "./NavBarComponent4";
@@ -17,7 +17,7 @@ export default function Home() {
                         </div>
                         </a>
                         <div className="img-text">
-                        <span className="header-text"><strong>Ingresar nuevo estudiante</strong></span>
+                        <span className="header-text"><strong>Nuevo estudiante</strong></span>
                         </div>
                     </div>
                     <div className="single-box">
@@ -35,7 +35,7 @@ export default function Home() {
                         </div>
                         </a>
                         <div className="img-text">
-                        <span className="header-text"><strong>Cargar información</strong></span>
+                        <span className="header-text"><strong>Ver pruebas</strong></span>
                         </div>
                     </div>
                     <div className="single-box">
@@ -53,7 +53,7 @@ export default function Home() {
                         </div>
                         </a>
                         <div className="img-text">
-                        <span className="header-text"><strong>Listar cuotas</strong></span>
+                        <span className="header-text"><strong>Ver cuotas</strong></span>
                         </div>
                     </div>
                     <div className="single-box">
@@ -71,7 +71,7 @@ export default function Home() {
                         </div>
                         </a>
                         <div className="img-text">
-                        <span className="header-text"><strong>Obtener resumen de pagos</strong></span>
+                        <span className="header-text"><strong>Resumen de pagos</strong></span>
                         </div>
                     </div>
                     <div className="single-box">
@@ -91,8 +91,8 @@ export default function Home() {
 
 const GlobalStyle = createGlobalStyle`
 body {
-      background-color: #121212;
-      font-family: Arial, sans-serif;
+      background-color: #FFFFFF;
+      font-family: Cantarell,sans-serif;
     }
 `
 
@@ -100,19 +100,26 @@ const HomeStyle = styled.nav`
 .text-center {
     text-align: center;
     justify-content: center;
-    padding-top: 8px;
-    color: white;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    color: #190482;
+    font-weight: 700;
+    font-size: 50px;
+    font-family: Cantarell,sans-serif;
 }
 
 .box-area {
+    cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    
 }
 
 .single-box {
+    box-shadow: 0 7px 25px -5px rgba(0, 0, 0, 0.1);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -120,7 +127,8 @@ const HomeStyle = styled.nav`
     justify-content: center;
     width: 350px;
     height: auto;
-    border-radius: 4px;
+    outline: none;
+    border-radius: 20px;
     background-color: white;
     text-align: center;
     margin: 20px;
@@ -142,43 +150,46 @@ const HomeStyle = styled.nav`
 }
 
 .single-box:nth-child(1) .img-area{
-    background-image: url(https://img.freepik.com/vector-premium/chat-archivo-documento-texto-comentando-o-editando-documentos-linea-ilustracion-dibujos-animados-plana_101884-838.jpg)
+    background-image: url(https://img.icons8.com/?size=512&id=UkLBG0sZoWV0&format=png)
 }
 
 .header-text{
     font-size: 23px;
     font-weight: 500;
     line-height: 48px;
+    font-family: Cantarell,sans-serif;
 }
 .img-text p{
     font-size: 15px;
     font-weight: 400;
     line-height: 30px;
+    font-family: Cantarell,sans-serif;
 }
 .single-box:hover{
-    background: #e84393;
+    transform: translateY(-5px);
+    background: #8E8FFA;
     color: #fff;}
 
 .single-box:nth-child(2) .img-area{
-        background-image: url(https://cdn-icons-png.flaticon.com/512/2784/2784403.png)
+        background-image: url(https://img.icons8.com/?size=512&id=295&format=png)
 }
 .single-box:nth-child(3) .img-area{
-        background-image: url(https://img.freepik.com/vector-gratis/ingresos-netos-calculando-ilustracion-concepto-abstracto-calculo-sueldos-formula-ingresos-netos-salario-neto-contabilidad-corporativa-calculo-ganancias-estimacion-ganancias_335657-1238.jpg?w=2000)
+        background-image: url(https://img.icons8.com/?size=512&id=56793&format=png)
 }
 .single-box:nth-child(4) .img-area{
-        background-image: url(https://previews.123rf.com/images/magurok/magurok1606/magurok160600092/60046224-lado-la-celebraci%C3%B3n-de-solicitud-de-trabajo-aprobado-aprobado-cv-con-el-sello-la-l%C3%ADnea-delgada-plana.jpg)
+        background-image: url(https://img.icons8.com/?size=512&id=48800&format=png)
 }
 .single-box:nth-child(5) .img-area{
-        background-image: url(https://media.istockphoto.com/vectors/agreement-contract-and-offer-color-line-icon-proposal-linear-vector-vector-id1271477227?k=20&m=1271477227&s=612x612&w=0&h=XOSF2ISnfGJZ7bb-fU7rRdDJzTKehDmOF9kcJ5gIEmA=)
+        background-image: url(https://img.icons8.com/?size=512&id=78059&format=png)
 }
 .single-box:nth-child(6) .img-area{
-    background-image: url(https://cdn-icons-png.flaticon.com/512/5669/5669068.png)
+    background-image: url(https://img.icons8.com/?size=512&id=11645&format=png)
 }
 .single-box:nth-child(7) .img-area{
-    background-image: url(https://cdn-icons-png.flaticon.com/512/2124/2124502.png)
+    background-image: url(https://img.icons8.com/?size=512&id=48622&format=png)
 }
 .single-box:nth-child(8) .img-area{
-    background-image: url(https://cdn-icons-png.flaticon.com/512/3687/3687412.png)
+    background-image: url(https://img.icons8.com/?size=512&id=11705&format=png)
 }
 
 .login-box{

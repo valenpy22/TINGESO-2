@@ -1,20 +1,16 @@
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 import NavBarComponent5 from "./NavBarComponent5";
 import styled from "styled-components";
-import FeeService from "../services/FeeService";
 import StudentService from "../services/StudentService";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
-import { useNavigate } from "react-router-dom";
 
 export default function GenerateFeeComponent(props){
-    const navigate = useNavigate();
     const initialState = {
         rut: "",
         number_of_fees: "",
     }
-    const form = useRef();
 
     const [input, setInput] = useState(initialState);
 
@@ -47,11 +43,6 @@ export default function GenerateFeeComponent(props){
                     timer: "2000",
                 });
 
-                let fees_generated = {
-                    rut: input.rut,
-                    number_of_fees: input.number_of_fees,
-                };
-
 
                 StudentService.getStudentByRut(input.rut).then((res) => {
                     let student = res.data;
@@ -78,7 +69,7 @@ export default function GenerateFeeComponent(props){
                 <NavBarComponent5 />
                 <div className="mainclass">
                     <div className="form1">
-                        <h1 className="text-center"><b>Generar cuotas a estudiante</b></h1>
+                        <h1 className="text-center"><b>Generar cuotas</b></h1>
                         <div className="formcontainer">
                             <hr></hr>
                             <div className="container">
@@ -110,7 +101,7 @@ const Styles = styled.div`
     text-align: center;
     justify-content: center;
     padding-top: 8px;
-    font-family: "Arial Black", Gadget, sans-serif;
+    font-family: Cantarell,sans-serif;
     font-size: 30px;
     letter-spacing: 0px;
     word-spacing: 2px;
@@ -123,6 +114,7 @@ const Styles = styled.div`
 }
 
 .home{
+    font-family: Cantarell,sans-serif;
     background-color: #ffffff;
     margin: 0;
     padding: 0;
@@ -132,14 +124,16 @@ const Styles = styled.div`
     margin-top: 20px;
     display: flex;
     justify-content: center;
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Cantarell,sans-serif;
     font-size: 15px;
 }
 
 .form1{
+    font-family: Cantarell,sans-serif;
     background-color: #f0f0f0;
-    width: 50%;
+    width: 30%;
     padding: 40px;
+    border-radius: 20px;
 }
 
 input[type=rut], input[type=date], input[type=text], select, textarea {
@@ -152,6 +146,7 @@ input[type=rut], input[type=date], input[type=text], select, textarea {
 }
 
 Button {
+    font-family: Cantarell,sans-serif;
     color: white;
     padding: 14px 0;
     margin: 10px 0;
@@ -165,11 +160,13 @@ Button:hover {
 }
 
 .formcontainer {
+    font-family: Cantarell,sans-serif;
     text-align: left;
-    margin: 24px 100px 9px;
+    margin: 24px 50px 9px;
 }
 
 .container {
+    font-family: Cantarell,sans-serif;
     padding: 24px 0;
     text-align:left;
 }

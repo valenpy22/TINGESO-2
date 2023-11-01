@@ -139,4 +139,10 @@ const Styles = styled.div`
     font-weight: bold;
     color: #009879;
 }
+
+.container{
+    text-align: center;
+    padding-top: 30px;
+    line-height: 3;
+}
 `

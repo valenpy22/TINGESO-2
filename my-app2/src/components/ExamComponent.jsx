@@ -100,6 +100,7 @@ export default ExamComponent;
 
 const Styles = styled.div`
 .container{
+    font-family: Cantarell,sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,8 +108,9 @@ const Styles = styled.div`
     margin: 2%;
 }
 .f{
+    font-family: Cantarell,sans-serif;
     margin-top: 40px;
-    border: 3px solid rgb(162, 161, 161);
+    border: 1px solid rgb(0, 0, 0, 0.1);
     padding: 40px;
     padding-top: 10px;
     border-radius: 40px;
@@ -120,6 +122,7 @@ const Styles = styled.div`
         margin-right: 200px;}
 }
 .header{
+    font-family: Cantarell,sans-serif;
     background-color: #1b3039;
     display: flex;
     justify-content: flex-end;
@@ -165,10 +168,12 @@ const Styles = styled.div`
     transform: scale(1.1);
 }
 .form1{
-    border: 1px solid rgb(82, 82, 173);
+    font-family: Cantarell,sans-serif;
+    border: 1px solid rgb(0, 0, 0, 0.1);
     padding: 30px;
     border-radius: 30px;
     margin-left: 300px;
     margin-right: 300px;
+    text-align: center;
 }
 `

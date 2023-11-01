@@ -6,10 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
 import InputMask from 'react-input-mask';
-import {useNavigate} from 'react-router-dom'
 
 export default function NewStudentComponent(props){
-    const navigate = useNavigate();
 
     const initialState = {
         rut: "",
@@ -183,7 +181,7 @@ const Styles = styled.div`
     text-align: center;
     justify-content: center;
     padding-top: 8px;
-    font-family: "Arial Black", Gadget, sans-serif;
+    font-family: Cantarell,sans-serif;
     font-size: 30px;
     letter-spacing: 0px;
     word-spacing: 2px;
@@ -206,15 +204,17 @@ const Styles = styled.div`
     display: flex;
     padding: 0 5%;
     justify-content: center;
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Cantarell,sans-serif;
     font-size: 15px;
 }
 
 .form1{
+    box-shadow: 0 7px 25px -5px rgba(0, 0, 0, 0.1);
     background-color: #f0f0f0;
-    width: 40%;
+    width: 35%;
     padding: 40px;
     margin: 0 auto;
+    border-radius: 20px;
 }
 
 input[type=rut], input[type=date], input[type=text], select, textarea {
@@ -241,7 +241,7 @@ Button:hover {
 
 .formcontainer {
     text-align: left;
-    margin: 24px 50px 9px;
+    margin: 24px 40px 9px;
 }
 
 .container {

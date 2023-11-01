@@ -29,11 +29,12 @@ const NavStyle = styled.nav`
     align-items: center;
     height: 85px;
     padding: 5px 10%;
+    font-family: Cantarell,sans-serif;
   }
 .header .logo{
     margin-right: auto;
     color: white;
-    font-family: 'Pacifico',serif;
+    font-family: Cantarell,sans-serif;
   }
 .header .btn button{
     margin-left: 20px;
