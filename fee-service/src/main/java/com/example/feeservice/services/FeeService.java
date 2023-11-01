@@ -156,8 +156,8 @@ public class FeeService {
     }
 
     public String getLastPaymentDate(String rut){
-        FeeEntity fee = feeRepository.getFeeByRutOrderByPaymentDateDesc(rut);
-        if(fee.getPayment_date().isEmpty()){
+        FeeEntity fee = getFeeByRutOrderByPaymentDateDesc(rut);
+        if(fee == null || fee.getPayment_date() == null){
             return "";
         }
         return fee.getPayment_date();
@@ -208,6 +208,7 @@ public class FeeService {
     }
 
     public void payFee(Integer feeId){
+        System.out.println(feeId);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date_now = LocalDate.now().format(formatter);
         int month = LocalDate.now().getMonthValue();
@@ -226,7 +227,7 @@ public class FeeService {
         LocalDate datenow = LocalDate.parse(date_now, formatter);
         FeeEntity fee = feeRepository.findById(feeId);
 
-        if(datenow.isBefore(max_date) && datenow.isAfter(min_date)){
+        if(datenow.isBefore(max_date) ){
             fee.setState("PAID");
             fee.setPayment_date(date_now);
         }else{
@@ -293,18 +294,14 @@ public class FeeService {
 
     public void calculateDiscountOnFeesByAverageScore(String rut, Double average_score){
         List<FeeEntity> fees = getFeesByRut(rut);
-        double discount_average_score = 0.0;
 
         for(FeeEntity fee : fees){
             if(fee.getState().equals("PENDING")){
                 if(average_score >= 950 && average_score <= 1000){
-                    discount_average_score = fee.getPrice()*0.1;
                     fee.setPrice(fee.getPrice()*0.9);
                 }else if(average_score >= 900 && average_score < 950){
-                    discount_average_score = fee.getPrice()*0.05;
                     fee.setPrice(fee.getPrice()*0.95);
                 }else if(average_score >= 850 && average_score < 900){
-                    discount_average_score = fee.getPrice()*0.02;
                     fee.setPrice(fee.getPrice()*0.98);
                 }
                 saveFee(fee);
@@ -318,6 +315,8 @@ public class FeeService {
 
         for(FeeEntity fee : fees){
             if(fee.getState().equals("PENDING")){
+                System.out.println(fee.getPrice());
+                System.out.println(fee.getPrice()*0.1);
                 if(average_score >= 950 && average_score <= 1000){
                     discount_average_score = fee.getPrice()*0.1;
                 }else if(average_score >= 900 && average_score < 950){

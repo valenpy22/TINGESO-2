@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import birreteImg from "./birrete.png";
 
 function NavBarComponent1(){
     return(
@@ -7,6 +8,7 @@ function NavBarComponent1(){
         <NavStyle>
             <header className="header">
                 <div className="logo">
+                    <img src={birreteImg} alt="logo" width="70px" height="70px"/>
                     <h1>TopEducation</h1>
                 </div>
                 <nav>
@@ -35,6 +37,9 @@ const NavStyle = styled.nav`
     margin-right: auto;
     color: white;
     font-family: Cantarell,sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 .header .btn button{
     margin-left: 20px;

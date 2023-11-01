@@ -5,6 +5,7 @@ import StudentService from "../services/StudentService";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
+import FooterComponent from "./FooterComponent";
 
 export default function GenerateFeeComponent(props){
     const initialState = {
@@ -41,6 +42,8 @@ export default function GenerateFeeComponent(props){
                 {
                     icon: "success",
                     timer: "2000",
+                }).then(() => {
+                    window.location.href = "/generate-fees";
                 });
 
 
@@ -91,6 +94,7 @@ export default function GenerateFeeComponent(props){
                     </div>
                 </div>
             </div>
+            <FooterComponent />
         </Styles>
     )
 }

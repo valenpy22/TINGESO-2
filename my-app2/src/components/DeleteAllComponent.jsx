@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import NavBarComponent3 from "./NavBarComponent3";
+import FooterComponent from "./FooterComponent";
 
 class DeleteAllComponent extends Component {
 
@@ -52,7 +53,7 @@ class DeleteAllComponent extends Component {
                         </div>
                     </div>
                 </Styles>
-                
+                <FooterComponent/>
             </div>
         );
     }

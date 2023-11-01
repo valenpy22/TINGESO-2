@@ -23,7 +23,7 @@ class FileInformationComponent extends Component {
                 <Styles>
                     <div className = "f">
                         <div className = "container">
-                            <h1><b>Información de pruebas</b></h1>
+                            <h1 className="title"><b>Información de pruebas</b></h1>
                             {this.state.exams.length > 0 ? (
                                 <table className = "table table-striped table-bordered">
                                     <thead>
@@ -124,5 +124,13 @@ const Styles = styled.div`
     text-align: center;
     padding-top: 30px;
     line-height: 3;
+}
+
+.title{
+    padding-bottom: 30px;
+}
+
+.table {
+    margin-bottom: 5rem;
 }
 `

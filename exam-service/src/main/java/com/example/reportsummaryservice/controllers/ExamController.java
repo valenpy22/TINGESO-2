@@ -42,18 +42,11 @@ public class ExamController {
 
     @GetMapping("/report-summaries")
     public ResponseEntity<List<List<Object>>> getReportSummaries(){
-        if(examService.getReportSummaries().isEmpty()){
-            return ResponseEntity.noContent().build();
-        }
-
         return ResponseEntity.ok(examService.getReportSummaries());
     }
 
     @GetMapping("/discounts")
     public ResponseEntity<List<List<Object>>> getDiscounts(){
-        if(examService.getDiscounts().isEmpty()){
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok(examService.getDiscounts());
     }
 

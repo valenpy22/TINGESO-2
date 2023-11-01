@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import NavBarComponent1 from "./NavBarComponent1";
+import FooterComponent from "./FooterComponent";
 
 import ExamService from "../services/ExamService";
 import styled from "styled-components";
@@ -74,11 +74,20 @@ class ExamComponent extends Component{
                         <h1><b>Cargar el archivo de datos</b></h1>
                         <Row className="mt-4">
                             <Col col="12">
-                            <Form.Group className="mb-3" controlId="formFileLg">
-                                <Form.Control type="file" size="lg" onChange={this.onFileChange} />
+                            <Form.Group className="a">
+                                <Form.Label className="custom-file-label" htmlFor="customFile">
+                                    {this.state.file ? this.state.file.name : "Elegir archivo..."}
+                                </Form.Label>
+                                <Form.Control 
+                                    style={{ display: 'none' }} 
+                                    id="customFile" 
+                                    type="file" 
+                                    size="lg" 
+                                    onChange={this.onFileChange} 
+                                />
                             </Form.Group>
-                            <Button variant="primary" onClick={this.onFileUpload}>
-                                Cargar el archivo a la Base de Datos</Button>
+                            <button className="btn" variant="primary" onClick={this.onFileUpload}>
+                                Cargar archivo</button>
                             </Col>
                         </Row>
                         </div>
@@ -91,6 +100,7 @@ class ExamComponent extends Component{
                         <h5><b>Recuerde que el nombre del archivo debe ser "students_exams.csv"</b></h5>
                     </div>
                 </Styles>
+                <FooterComponent/>
           </div>
         )
     }
@@ -106,6 +116,8 @@ const Styles = styled.div`
     justify-content: center;
     align-items: center;
     margin: 2%;
+    text-align: center;
+
 }
 .f{
     font-family: Cantarell,sans-serif;
@@ -175,5 +187,59 @@ const Styles = styled.div`
     margin-left: 300px;
     margin-right: 300px;
     text-align: center;
+    color: #888;
 }
+
+.custom-file-label {
+    padding: 10px 25px;
+    border: 1px solid #ced4da;
+    border-radius: 25px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    color: #495057;
+    //centrar verticalmente
+    display: flex;
+    align-items: center;
+}
+
+.custom-file-label:hover {
+    background-color: #e9ecef;
+
+}
+
+.container h1 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.btn {
+    margin-top: 20px;
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    padding-top: 10px;
+    color: #fff;
+
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.a{
+    margin-bottom: 25px;
+
+}
+
+.col{
+    margin: 0 25px;
+    padding: 0 75px;
+}
+
 `

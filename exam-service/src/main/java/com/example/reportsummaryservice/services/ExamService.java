@@ -125,14 +125,6 @@ public class ExamService {
         return examRepository.findByExam_dateOrderByExam_dateDesc(rut);
     }
 
-    public void calculateDiscountOnFeesByAverageScore(String rut){
-        String last_date = getLastExamDate(rut);
-        double average_score = getAverageScoreByRutAndMonth(rut, last_date);
-
-        restTemplate.put("http://fee-service/fees/score-discount/"+rut+"/"+average_score, Double.class);
-
-    }
-
     public void deleteAll(){
         examRepository.deleteAll();
     }
@@ -162,16 +154,17 @@ public class ExamService {
         report.add(rut);
         report.add(studentModel.getNames());
         report.add(studentModel.getSurnames());
+        report.add(studentModel.getPayment_method());
         report.add(getNumberOfExamsByRut(rut));
         report.add(getAverageScoreByRut(rut));
-        report.add(final_price);
-        report.add(studentModel.getPayment_method());
         report.add(total_fees);
         report.add(paid_fees);
-        report.add(total_paid);
-        report.add(last_payment);
-        report.add(total_debt);
         report.add(late_fees);
+        report.add(total_paid);
+        report.add(total_debt);
+        report.add(last_payment);
+        report.add(final_price);
+
 
         return report;
     }
@@ -206,6 +199,7 @@ public class ExamService {
         List<List<Object>> discounts = new ArrayList<>();
 
         for(String rut : ruts){
+            System.out.println(rut);
             discounts.add(calculateDiscount(rut));
         }
 

@@ -9,36 +9,18 @@ class ReportSummaryComponent extends Component {
             reportSummaries: [],
         };
     }
-    componentDidMount() {
-        fetch("http://localhost:8080/exams/report-summaries")
-        .then((response) => {
+
+    calculateReportSummaries = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/exams/report-summaries");
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
-            return response.text();  // <-- Cambia json() a text()
-        })
-        .then((data) => {
-            if (data) {  // <-- Verifica si la respuesta no está vacía
-                this.setState({ reportSummaries: JSON.parse(data) });  // <-- Analiza la respuesta
-            } 
-        })
-        .catch((error) => {
-            console.log("Error fetching the discounts: ", error);
-        });
-    }
-
-    async calculateReportSummaries() {
-        const requestOptions = {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(this.state.reportSummaries),
-        };
-        const response = await fetch(
-            "http://localhost:8080/exams/report-summaries",
-            requestOptions
-        );
-        const data = await response.json();
-        this.setState({ reportSummaries: data });
+            const data = await response.json();
+            this.setState({ reportSummaries: data });
+        } catch (error) {
+            console.log("Error fetching the reports: ", error);
+        }
     }
 
     render(){
@@ -48,7 +30,7 @@ class ReportSummaryComponent extends Component {
                 <Styles>
                     <div className = "f">
                         <div className = "container">
-                            <h1><b>Resumen de pagos</b></h1>
+                            <h1 className="title"><b>Resumen de pagos</b></h1>
                             {this.state.reportSummaries.length > 0 ? (
                                 <table className = "table table-striped table-bordered">
                                     <thead>
@@ -71,7 +53,20 @@ class ReportSummaryComponent extends Component {
                                     </thead>
                                     <tbody>
                                         {this.state.reportSummaries.map((reportSummary, index) => (
-                                            <tr key={index}> {reportSummary}
+                                            <tr key={index}>
+                                                <td>{reportSummary[0]}</td>
+                                                <td>{reportSummary[1]}</td>
+                                                <td>{reportSummary[2]}</td>
+                                                <td>{reportSummary[3]}</td>
+                                                <td>{reportSummary[4]}</td>
+                                                <td>{reportSummary[5]}</td>
+                                                <td>{reportSummary[6]}</td>
+                                                <td>{reportSummary[7]}</td>
+                                                <td>{reportSummary[8]}</td>
+                                                <td>{reportSummary[9]}</td>
+                                                <td>{reportSummary[10]}</td>
+                                                <td>{reportSummary[11]}</td>
+                                                <td>{reportSummary[12]}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -79,7 +74,6 @@ class ReportSummaryComponent extends Component {
                             ) : (
                                 <p>No hay resúmenes de pagos registrados.</p>
                             )}
-                            {/* Botón para calcular resumenes de pagos*/}
                             <button className="boton" onClick={this.calculateReportSummaries}>Calcular resumen</button>
                         </div>
                     </div>
@@ -180,5 +174,14 @@ const Styles = styled.div`
     cursor: pointer;
     transition-duration: 0.4s;
     margin: 4px 2px;
+    margin-top: 20px;
+}
+
+.title{
+    padding-bottom: 30px;
+}
+
+.table {
+    margin-bottom: 5rem;
 }
 `

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import NavBarComponent4 from "./NavBarComponent4";
+import FooterComponent from "./FooterComponent";
 
 export default function Home() {
     return (
@@ -35,7 +36,7 @@ export default function Home() {
                         </div>
                         </a>
                         <div className="img-text">
-                        <span className="header-text"><strong>Ver pruebas</strong></span>
+                        <span className="header-text"><strong>Cargar pruebas</strong></span>
                         </div>
                     </div>
                     <div className="single-box">
@@ -85,6 +86,7 @@ export default function Home() {
                     </div>
                 </div>
             </HomeStyle>
+            <FooterComponent />
         </div>
     );
 }

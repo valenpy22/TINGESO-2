@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ExamRepository extends JpaRepository<ExamEntity, Integer> {
-    @Query(value = "SELECT DISTINCT rut FROM exams", nativeQuery = true)
+    @Query(value = "SELECT DISTINCT exams.rut FROM exams", nativeQuery = true)
     List<String> getRuts();
 
     @Query(value = "SELECT * FROM exams WHERE exams.rut = :rut", nativeQuery = true)

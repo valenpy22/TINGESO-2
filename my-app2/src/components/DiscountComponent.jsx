@@ -10,37 +10,18 @@ class DiscountComponent extends Component {
         };
     }
 
-    componentDidMount() {
-        fetch("http://localhost:8080/exams/discounts")
-        .then((response) => {
+
+    calculateDiscounts = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/exams/discounts");
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
-            return response.text();  // <-- Cambia json() a text()
-        })
-        .then((data) => {
-            if (data) {  // <-- Verifica si la respuesta no está vacía
-                this.setState({ discounts: JSON.parse(data) });  // <-- Analiza la respuesta
-            } 
-        })
-        .catch((error) => {
+            const data = await response.json();
+            this.setState({ discounts: data });
+        } catch (error) {
             console.log("Error fetching the discounts: ", error);
-        });
-    }
-
-
-    async calculateDiscounts() {
-        const requestOptions = {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(this.state.discounts),
-        };
-        const response = await fetch(
-            "http://localhost:8080/exams/discounts",
-            requestOptions
-        );
-        const data = await response.json();
-        this.setState({ discounts: data });
+        }
     }
 
 
@@ -52,7 +33,7 @@ class DiscountComponent extends Component {
                 <Styles>
                     <div className="f">
                         <div className="container">
-                            <h1><b>Lista de descuentos</b></h1>
+                            <h1 className="title"><b>Lista de descuentos</b></h1>
                             {this.state.discounts.length > 0 ? (
                                 <table className="table table-striped table-bordered">
                                     <thead>
@@ -81,7 +62,6 @@ class DiscountComponent extends Component {
                             ) : (
                                 <p>No hay descuentos registrados.</p>
                             )}
-                            {/*Botón para calcular la planilla de descuentos con el tipo PUT */}
 
                             <button className="boton" onClick={this.calculateDiscounts}>Calcular planilla</button>
                         </div>
@@ -182,5 +162,15 @@ const Styles = styled.div`
     cursor: pointer;
     transition-duration: 0.4s;
     margin: 4px 2px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.title{
+    padding-bottom: 30px;
+}
+
+.table {
+    margin-bottom: 5rem;
 }
 `

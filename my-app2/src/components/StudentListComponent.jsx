@@ -35,7 +35,7 @@ class StudentListComponent extends Component{
                 <Styles>
                     <div className="f">
                         <div className="container">
-                            <h1><b>Lista de estudiantes</b></h1>
+                            <h1 className="title"><b>Lista de estudiantes</b></h1>
                             {this.state.students.length > 0 ? (
                                 <table className="table table-striped table-bordered">
                                     <thead>
@@ -144,5 +144,13 @@ const Styles = styled.div`
     text-align: center;
     padding-top: 30px;
     line-height: 3;
+}
+
+.title{
+    padding-bottom: 20px;
+}
+
+.table {
+    margin-bottom: 5rem;
 }
 `
