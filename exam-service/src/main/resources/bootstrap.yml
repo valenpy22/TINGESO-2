@@ -1,33 +1,20 @@
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://eureka-service:8761/eureka/
 spring:
   devtools:
     restart:
-      aditional-paths: src/main/java
+      additional-paths: src/main/java
   application:
-    name: exam-service
-  jpa:
-    database: MYSQL
-    generate-ddl: true
-    show-sql: true
-    hibernate:
-      ddl-auto: create
+    name: exams-service
   cloud:
     config:
       enabled: true
       uri: http://localhost:8081
   datasource:
-    plataform: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_DB_HOST}/${MYSQL_DB_EXAMENES}?useSSL=false
-    username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
-    hikari:
-      minimumIdle: 20
-      maximumPoolSize: 30
-      connectionTimeout: 50000
-      initialization-fail-timeout: 0
+    url: jdbc:mysql://mysql:3306/exams?autorReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: Tingeso2023#
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: MySQL8Dialect
+      ddl-auto: create
