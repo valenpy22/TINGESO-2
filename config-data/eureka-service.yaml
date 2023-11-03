@@ -9,3 +9,4 @@ eureka:
       
 instance:
   prefer-ip-address: true
+  ip-address: ${status.podIP}
