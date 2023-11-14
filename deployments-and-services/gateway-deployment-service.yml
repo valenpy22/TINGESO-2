@@ -18,7 +18,7 @@ spec:
         - name: gateway-service
           image: valenpy22/gateway-service:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
           env:
             - name: SPRING_CLOUD_CONFIG_URI
               value: http://config-service:8081

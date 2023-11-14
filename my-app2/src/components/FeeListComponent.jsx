@@ -7,6 +7,7 @@ class FeeListComponent extends Component {
         super(props);
         this.state = {
             fees: [],
+            searchRut: '',
         };
     }
 
@@ -18,6 +19,20 @@ class FeeListComponent extends Component {
         fetch("http://localhost:8080/fees")
             .then((response) => response.json())
             .then((data) => this.setState({ fees: data }));
+    }
+
+    fetchFeesByRut = (rut) => {
+        fetch(`http://localhost:8080/fees/by-student/${rut}`)
+            .then((response) => response.json())
+            .then((data) => this.setState({ fees: data }));
+    }
+
+    handleSearchChange = (event) => {
+        this.setState({ searchRut: event.target.value });
+    }
+
+    handleSearch = () => {
+        this.fetchFeesByRut(this.state.searchRut);
     }
 
     payFee = async (id) => {
@@ -47,8 +62,8 @@ class FeeListComponent extends Component {
         const month = fee.max_date_payment.substring(3, 5);
 
         const currentDate = new Date();
-        const paymentStartDate = new Date(year, month - 1, 5);
-        const paymentEndDate = new Date(year, month - 1, 10);
+        const paymentStartDate = new Date(year, month - 1, 4);
+        const paymentEndDate = new Date(year, month - 1, 11);
 
         if(currentDate < paymentStartDate || currentDate > paymentEndDate)
             return true;
@@ -61,6 +76,17 @@ class FeeListComponent extends Component {
             <div>
                 <NavBarComponent3 />
                 <Styles>
+                    <h3 className="title2"><b>Filtrar por rut</b></h3>
+                    {/* Barra de búsqueda */}
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Ingrese rut"
+                            value={this.state.searchRut}
+                            onChange={this.handleSearchChange}
+                        />
+                        <button className="btn-search" onClick={this.handleSearch}>Buscar</button>
+                    </div>
                     <div className="f">
                         <div className="container">
                             <h1 className="title"><b>Lista de cuotas</b></h1>
@@ -188,11 +214,40 @@ const Styles = styled.div`
 }
 
 .title{
-    padding-bottom: 30px;
+    padding-bottom: 25px;
+}
+
+.title2{
+    text-align: center;
+    padding-top: 30px;
 }
 
 .table {
     margin-bottom: 5rem;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+.search-bar input {
+    border-radius: 25px;
+    padding: 5px 10px;
+
+}
+
+.btn-search {
+    margin-left: 10px;
+    background-color: #3D30A2;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 `
