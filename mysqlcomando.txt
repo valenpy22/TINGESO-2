@@ -1,0 +1,1 @@
+kubectl exec -it mysql-57f89d5686-2q4kl -- mysql -h mysql -udatpy -p
